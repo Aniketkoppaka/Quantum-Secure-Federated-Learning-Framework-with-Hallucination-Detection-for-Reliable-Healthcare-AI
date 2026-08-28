@@ -111,6 +111,16 @@ The hallucination detection and clinical safety gating engine was evaluated syst
 | **50 Cases** | **68.0%** | **52.32%** | **100.0%** | **0.0%** | 56.55% | 30.10% |
 | **100 Cases** | **68.0%** | **52.32%** | **100.0%** | **0.0%** | 56.55% | 30.10% |
 
+#### 100-Case Final Confusion Matrix:
+```
+                      | Pred VERIFIED_SAFE | Pred CLINICAL_WARNING | Pred BLOCKED
+----------------------------------------------------------------------------------
+True VERIFIED_SAFE    |         32         |          12           |       4
+True CLINICAL_WARNING |          0         |           0           |       8
+True BLOCKED (Danger) |          0         |           8           |      36
+----------------------------------------------------------------------------------
+```
+
 > **Key Clinical Safety Finding**: Across every single evaluation scale ($N=5, 10, 25, 50, 100$), the system maintained a **100.0% catch rate on fatal contraindications** with **0.0% False Negatives**, guaranteeing that no dangerous drug interactions were ever permitted through as safe recommendations. Full detailed reports are consolidated in [`results/final_multi_scale_benchmark_report.json`](results/final_multi_scale_benchmark_report.json).
 
 ### 3. Post-Quantum Cryptographic Overhead & Latency
@@ -155,11 +165,14 @@ For training full 7B parameter models (e.g. `Qwen/Qwen2.5-1.5B-Instruct` or `Bio
 
 ---
 
-## 🧪 Running Automated Unit Tests
+## 🧪 Running Automated Unit Tests & Multi-Scale Benchmark
 
-Run the complete pytest verification suite covering PQC cryptographic operations, multi-path consensus, fact checking, and federated server aggregation:
 ```bash
+# Run pytest unit test suite (4/4 passing)
 python -m pytest tests/test_framework.py -v
+
+# Run the 100-case systematic multi-scale benchmark suite (5, 10, 25, 50, 100 cases)
+python evaluate_multi_scale.py
 ```
 
 ---
@@ -168,31 +181,32 @@ python -m pytest tests/test_framework.py -v
 
 ```
 .
-├── app.py                     # FastAPI web server and interactive clinician dashboard
-├── pqc_security/              # NIST Post-Quantum Cryptography implementations
-│   ├── kyber_engine.py        # CRYSTALS-Kyber-768 (ML-KEM FIPS 203) engine
-│   ├── dilithium_signer.py    # CRYSTALS-Dilithium3 (ML-DSA FIPS 204) engine
-│   └── pqc_manager.py         # Quantum-safe payload packaging & authentication
-├── hallucination_engine/      # Clinical verification and safety gating
-│   ├── knowledge_retriever.py # PubMed & clinical guideline RAG retriever
-│   ├── self_consistency.py    # Multi-path stochastic consensus analyzer
-│   ├── fact_checker.py        # Claim-level NLI entailment & red-flag detector
-│   └── decision_engine.py     # Composite confidence scorer & multi-tier gate
-├── federated_core/            # Federated learning orchestration
-│   ├── dataset_loader.py      # Non-IID medical data partitioner
-│   ├── hospital_node.py       # Edge client local trainer & PQC updater
-│   ├── federated_server.py    # Server-side Dilithium verification & FedAvg aggregator
-│   └── simulation_runner.py   # Multi-round FL simulation pipeline
-├── kaggle/                    # GPU acceleration package for Kaggle T4
+├── app.py                         # FastAPI server and clinician web dashboard
+├── evaluate_multi_scale.py        # Multi-scale systematic benchmark evaluator (5 to 100 cases)
+├── pqc_security/                  # NIST Post-Quantum Cryptography implementations
+│   ├── kyber_engine.py            # CRYSTALS-Kyber-768 (ML-KEM FIPS 203) engine
+│   ├── dilithium_signer.py        # CRYSTALS-Dilithium3 (ML-DSA FIPS 204) engine
+│   └── pqc_manager.py             # Quantum-safe payload packaging & authentication
+├── hallucination_engine/          # Clinical verification and safety gating
+│   ├── knowledge_retriever.py     # PubMed & clinical guideline RAG retriever
+│   ├── self_consistency.py        # Multi-path stochastic consensus analyzer
+│   ├── fact_checker.py            # Claim-level NLI entailment & red-flag detector
+│   └── decision_engine.py         # Composite confidence scorer & multi-tier gate
+├── federated_core/                # Federated learning orchestration
+│   ├── dataset_loader.py          # Non-IID medical data partitioner
+│   ├── hospital_node.py           # Edge client local trainer & PQC updater
+│   ├── federated_server.py        # Server-side Dilithium verification & FedAvg aggregator
+│   └── simulation_runner.py       # Multi-round FL simulation pipeline
+├── kaggle/                        # GPU acceleration package for Kaggle T4
 │   ├── kaggle_fedlora_training.ipynb # QLoRA 4-bit fine-tuning notebook
-│   └── README.md              # Step-by-step GPU execution instructions
-├── results/                   # Benchmark figures and evaluation reports
-│   ├── experiment_results_report.json # Empirical Kaggle Tesla T4 metrics
-│   └── federated_convergence_plot.png # Training loss & perplexity curves
-├── tests/                     # Test suite
-│   └── test_framework.py      # End-to-end automated pytest test cases
-├── requirements.txt           # Python dependencies
-└── README.md                  # Comprehensive architectural documentation
+│   └── README.md                  # Step-by-step GPU execution instructions
+├── results/                       # Final benchmark figures and evaluation reports
+│   ├── final_multi_scale_benchmark_report.json # Consolidated 5-100 case empirical metrics
+│   └── federated_convergence_plot.png          # Training loss & perplexity curves
+├── tests/                         # Test suite
+│   └── test_framework.py          # End-to-end automated pytest test cases
+├── requirements.txt               # Python dependencies
+└── README.md                      # Comprehensive architectural documentation
 ```
 
 ---
