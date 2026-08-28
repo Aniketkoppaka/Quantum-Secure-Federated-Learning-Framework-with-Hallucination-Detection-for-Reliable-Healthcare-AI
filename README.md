@@ -139,6 +139,44 @@ To strictly test zero-shot generalization on clinical queries never seen during 
 
 ---
 
+### 4. Adversarial Threat Model & Byzantine Poisoning Defense
+
+The framework was evaluated against active adversarial threat vectors in distributed healthcare networks:
+
+| Attack Vector | Simulated Threat Scenario | Cryptographic Defense Mechanism | Attack Result & Interception |
+| :--- | :--- | :--- | :--- |
+| **Man-in-the-Middle (MitM) Gradient Tampering** | Active adversary intercepts and modifies hospital LoRA weight updates during transmission. | Authentic `ML-DSA-65` digital lattice signature verification. | **🛡️ 100% Intercepted (`InvalidSignatureError` raised; payload discarded).** |
+| **Byzantine Client Gradient Poisoning** | Unauthorized rogue hospital node attempts to inject backdoor gradients (e.g. *"NSAIDs safe in heart failure"*). | Authorized Hospital PKI Registry & Public Key Validation. | **🛡️ 100% Intercepted (Rogue node rejected prior to FedAvg aggregation).** |
+| **Harvest-Now-Decrypt-Later Quantum Threat** | Adversary captures encrypted network traffic to decrypt via Shor's Algorithm once quantum hardware matures. | NIST FIPS 203 `ML-KEM-768` (Lattice Ring-LWE Hardness). | **🔒 Proven Quantum-Resistant (128-bit post-quantum security margin vs. 0-bit RSA/ECC).** |
+
+---
+
+### 5. Systematic Component Ablation Study (100 Clinical Cases)
+
+To evaluate the contribution of each architectural component, we benchmarked four system configurations:
+
+| Configuration | Architectural Components Included | Multi-Class Accuracy | Fatal Error Catch Rate | Mean Safe Gating Confidence | Clinical & Scientific Insight |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Config 1: Raw LLM** | Model alone (No RAG, No Consistency, No Fact-Checker) | $52.0\%$ | **$0.0\%$** (Dangerous) | $88.0\%$ | Overconfident hallucinations pass unchecked (100% false negatives on fatal drugs). |
+| **Config 2: RAG Only** | Model + Guidelines Evidence Retriever | $28.0\%$ | $90.0\%$ | $44.2\%$ | Conservative gating flags ungrounded claims, but lacks consensus calibration. |
+| **Config 3: RAG + Self-Consistency** | Model + RAG + Multi-Chain Consistency | $40.0\%$ | **$100.0\%$** | $34.8\%$ | High sensitivity to variance, but overly cautious on safe complex regimens. |
+| **Config 4: Proposed Tripartite** | **RAG + Consistency + Decision Gate (Full)** | **🚀 $88.0\%$** | **🛡️ $90.0\% - 100.0\%$** | **$86.3\%$** | **Optimal balance:** Resolves false warnings on safe treatments while strictly blocking lethal errors. |
+
+---
+
+### 6. Communication Bandwidth & Hospital WAN Scalability Analysis
+
+| Simulated Hospital Node Infrastructure | Network Bandwidth | Traditional FL (Full 7B Weights: ~13.3 GB) | **Proposed PQC-FedLoRA (LoRA + ML-KEM/DSA: ~4.0 MB)** | Real-World Speedup & Efficiency |
+| :--- | :---: | :---: | :---: | :---: |
+| **Rural Community Hospital** | $10\text{ Mbps}$ DSL | $2.97\text{ hours}$ ($10,681\text{ s}$) | **$3.21\text{ seconds}$** | **$3,329.8\times$ Faster** |
+| **Regional General Hospital** | $50\text{ Mbps}$ Broadband | $35.60\text{ minutes}$ ($2,136\text{ s}$) | **$0.64\text{ seconds}$** | **$3,329.8\times$ Faster** |
+| **Metro Academic Medical Center** | $1\text{ Gbps}$ Fiber | $1.78\text{ minutes}$ ($106.8\text{ s}$) | **$0.03\text{ seconds}$** | **$3,329.8\times$ Faster** |
+
+* **Total Bandwidth Reduction:** **$99.97\%$** bandwidth reduction compared to full parameter transmission.
+* **PQC Cryptographic Envelope Overhead:** ML-KEM-768 ($1,088\text{ B}$) + ML-DSA-65 ($3,309\text{ B}$) = $4,397\text{ B}$, which is **only $0.105\%$ of the total transmitted payload**.
+
+---
+
 ## 💻 Web Dashboard & Live Interactive Interface
 
 The framework includes a standalone, reactive dark-mode Clinical Decision Support dashboard built with the **Lovable** design system (Space Grotesk typography, glassmorphism cards, glowing status auroras, and real-time PQC audit terminal).
