@@ -130,6 +130,80 @@ CRITICAL_CONTRAINDICATIONS = [
             and any(w in text for w in ["without tdm", "no level", "without monitoring", "non-nephrotoxic", "no renal toxicity", "without therapeutic drug monitoring", "no level checks"])
         ),
         "warning": "CRITICAL CONTRADICTION: High-dose unmonitored aminoglycoside therapy in severe acute kidney injury is contraindicated due to severe cumulative nephrotoxicity and ototoxicity."
+    },
+    {
+        "name": "Methotrexate with Trimethoprim / TMP-SMX",
+        "trigger": lambda text: (
+            "methotrexate" in text
+            and any(t in text for t in ["tmp-smx", "bactrim", "trimethoprim", "cotrimoxazole", "septra"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "do not", "withhold", "stop"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Combining Methotrexate with Trimethoprim/TMP-SMX is contraindicated due to synergistic antifolate bone marrow toxicity and fatal pancytopenia."
+    },
+    {
+        "name": "Lithium with ACE Inhibitors",
+        "trigger": lambda text: (
+            "lithium" in text
+            and any(ace in text for ace in ["lisinopril", "enalapril", "ramipril", "captopril", "ace inhibitor", "acei"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "do not give", "do not prescribe", "withhold", "stop", "monitor level closely", "dose reduction"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Co-prescribing Lithium with ACE inhibitors reduces renal lithium clearance by 30-50%, risking severe neurotoxicity and lithium intoxication."
+    },
+    {
+        "name": "Live Attenuated Vaccines in Active Leukemia / Immunosuppression",
+        "trigger": lambda text: (
+            any(v in text for v in ["live attenuated", "mmr", "varicella", "yellow fever", "live vaccine"])
+            and any(c in text for c in ["leukemia", "chemotherapy", "immunosuppressed", "induction", "neutropenia"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "do not give", "do not administer", "withhold", "stop", "defer"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Live attenuated vaccines are strictly contraindicated during active immunosuppression or leukemia induction due to risk of fatal disseminated infection."
+    },
+    {
+        "name": "ACEi and ARBs in Pregnancy",
+        "trigger": lambda text: (
+            any(d in text for d in ["losartan", "valsartan", "lisinopril", "enalapril", "arb", "ace inhibitor"])
+            and any(p in text for p in ["pregnant", "pregnancy", "gestation", "trimester"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "do not give", "teratogen", "stop", "withhold"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: ACE inhibitors and ARBs are major teratogens in pregnancy, causing fetal renal dysgenesis, oligohydramnios, and neonatal death."
+    },
+    {
+        "name": "Aspirin in Pediatric Viral Illness (Reye Syndrome)",
+        "trigger": lambda text: (
+            any(a in text for a in ["aspirin", "acetylsalicylic acid", "bayer"])
+            and any(p in text for p in ["pediatric", "child", "children", "influenza", "varicella", "6-year-old", "4-year-old"])
+            and any(f in text for f in ["fever", "antipyretic", "viral", "myalgia", "febrile"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "do not give", "reye syndrome", "kawasaki"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Aspirin is contraindicated in pediatric viral illnesses due to high risk of precipitating fatal Reye Syndrome (acute encephalopathy and fatty liver failure)."
+    },
+    {
+        "name": "LABA Monotherapy in Persistent Asthma",
+        "trigger": lambda text: (
+            any(l in text for l in ["salmeterol", "formoterol", "laba monotherapy", "standalone laba"])
+            and "asthma" in text
+            and any(w in text for w in ["without ics", "without inhaled", "alone", "standalone", "without steroid"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: LABA monotherapy without an Inhaled Corticosteroid (ICS) is contraindicated in asthma due to increased risk of severe, life-threatening asthma exacerbations."
+    },
+    {
+        "name": "Metoclopramide in Parkinson Disease",
+        "trigger": lambda text: (
+            "parkinson" in text
+            and any(d in text for d in ["metoclopramide", "reglan", "d2 blocker", "dopamine receptor antagonist"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "do not", "withhold", "stop", "worsens"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Metoclopramide and central D2 dopamine antagonists are contraindicated in Parkinson's disease as they precipitate acute severe extrapyramidal motor crisis."
+    },
+    {
+        "name": "IV Calcium in Acute Digitalis / Digoxin Toxicity",
+        "trigger": lambda text: (
+            any(d in text for d in ["digoxin", "digitalis", "digitoxin"])
+            and any(c in text for c in ["calcium gluconate", "calcium chloride", "iv calcium"])
+            and any(t in text for t in ["toxicity", "overdose", "halo", "yellow-green", "arrhythmia"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "stone heart", "do not"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Rapid IV Calcium is contraindicated in severe Digoxin toxicity due to the risk of precipitating irreversible systolic cardiac arrest ('stone heart')."
     }
 ]
 

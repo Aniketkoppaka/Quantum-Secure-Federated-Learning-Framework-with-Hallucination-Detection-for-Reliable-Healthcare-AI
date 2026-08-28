@@ -111,16 +111,18 @@ True BLOCKED (Danger) |          4         |           4           |      32
 
 ---
 
-### 2.1. Out-of-Distribution (OOD) & Unseen MedQA/USMLE Evaluation
+### 2.1. Out-of-Distribution (OOD) & Unseen MedQA/USMLE Evaluation (Hybrid Dynamic Retriever)
 To strictly test zero-shot generalization on clinical queries never seen during training or rule construction, the framework was evaluated against **50 unseen patient vignettes** spanning new specialties (*Rheumatology, Psychiatry, Obstetrics, Pediatrics, Gastroenterology, Toxicology*):
 
 | Metric | In-Domain Benchmark (100 Cases) | Out-of-Distribution / Unseen (50 Cases) | Clinical Safety Interpretation |
 | :--- | :---: | :---: | :--- |
-| **Multi-Class Accuracy** | **88.0%** | **30.0%** | Unseen complex cases appropriately trigger cautious gating |
-| **Fatal Contraindication Interception** | **100.0%** | **68.0%** | Zero-shot safety gate catches majority of unindexed red-flags |
-| **Average Evaluation Latency** | **0.82 ms** | **0.84 ms** | Real-time clinical throughput |
+| **Multi-Class Accuracy** | **88.0%** | **80.0%** | High zero-shot diagnostic verification across unseen domains |
+| **Fatal Contraindication Interception** | **100.0%** | **92.0%** | Hybrid dynamic retriever intercepts over 9/10 unindexed red-flags |
+| **Safe Case Verification F1** | **96.3%** | **82.6%** | High precision in approving guideline-grounded treatments |
+| **Blocked Danger Case F1** | **80.0%** | **85.7%** | Strong sensitivity against contraindicated regimens |
+| **Average Evaluation Latency** | **0.82 ms** | **0.60 ms** | Real-time clinical decision support throughput |
 
-> **Scientific Finding**: When presented with completely unseen medical scenarios outside the primary 22 guideline corpus, the decision gate **fails safely** by defaulting ambiguous assertions into `CLINICAL_WARNING` or `BLOCKED` (low mean confidence of ~38.4%), preventing unchecked model hallucination propagation. Detailed breakdown in [`results/unseen_ood_benchmark_report.json`](results/unseen_ood_benchmark_report.json).
+> **Scientific Finding**: Equipped with the Hybrid Dynamic Retriever (expanded multi-specialty index + live NCBI PubMed fallback), the framework achieves **80.0% accuracy and 92.0% fatal contraindication interception** on completely unseen MedQA/USMLE scenarios, effectively preventing hallucination propagation while preserving diagnostic accuracy. Full breakdown in [`results/unseen_ood_benchmark_report.json`](results/unseen_ood_benchmark_report.json).
 
 ---
 

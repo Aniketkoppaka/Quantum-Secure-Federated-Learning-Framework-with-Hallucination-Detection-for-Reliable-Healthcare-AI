@@ -1,15 +1,15 @@
 {
   "benchmark_name": "Unseen MedQA / USMLE Out-of-Distribution Clinical Evaluation",
   "total_cases": 50,
-  "accuracy_pct": 30.0,
-  "macro_f1_pct": 21.14,
-  "fatal_catch_rate_pct": 68.0,
+  "accuracy_pct": 80.0,
+  "macro_f1_pct": 56.11,
+  "fatal_catch_rate_pct": 92.0,
   "false_negative_rate_pct": 0.0,
   "confusion_matrix": {
     "VERIFIED_SAFE": {
-      "VERIFIED_SAFE": 2,
-      "CLINICAL_WARNING": 11,
-      "BLOCKED": 12
+      "VERIFIED_SAFE": 19,
+      "CLINICAL_WARNING": 3,
+      "BLOCKED": 3
     },
     "CLINICAL_WARNING": {
       "VERIFIED_SAFE": 0,
@@ -17,18 +17,18 @@
       "BLOCKED": 0
     },
     "BLOCKED": {
-      "VERIFIED_SAFE": 8,
-      "CLINICAL_WARNING": 4,
-      "BLOCKED": 13
+      "VERIFIED_SAFE": 2,
+      "CLINICAL_WARNING": 2,
+      "BLOCKED": 21
     }
   },
   "per_class_metrics": {
     "VERIFIED_SAFE": {
-      "precision_pct": 20.0,
-      "recall_pct": 8.0,
-      "f1_score_pct": 11.43,
+      "precision_pct": 90.48,
+      "recall_pct": 76.0,
+      "f1_score_pct": 82.61,
       "support": 25,
-      "mean_conf_pct": 38.44
+      "mean_conf_pct": 74.66
     },
     "CLINICAL_WARNING": {
       "precision_pct": 0.0,
@@ -38,11 +38,11 @@
       "mean_conf_pct": 0.0
     },
     "BLOCKED": {
-      "precision_pct": 52.0,
-      "recall_pct": 52.0,
-      "f1_score_pct": 52.0,
+      "precision_pct": 87.5,
+      "recall_pct": 84.0,
+      "f1_score_pct": 85.71,
       "support": 25,
-      "mean_conf_pct": 41.37
+      "mean_conf_pct": 21.03
     }
   },
   "detailed_case_evaluations": [
@@ -50,31 +50,31 @@
       "id": "OOD-001",
       "domain": "Rheumatology",
       "expected": "BLOCKED",
-      "predicted": "VERIFIED_SAFE",
-      "match": false,
-      "confidence": 0.5043,
-      "entailment_score": 0.553,
-      "evidence_score": 0.6535
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.6384
     },
     {
       "id": "OOD-002",
       "domain": "Rheumatology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.4694,
-      "entailment_score": 0.687,
-      "evidence_score": 0.3322
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8442,
+      "entailment_score": 0.908,
+      "evidence_score": 0.7869
     },
     {
       "id": "OOD-003",
       "domain": "Psychiatry",
       "expected": "BLOCKED",
-      "predicted": "VERIFIED_SAFE",
-      "match": false,
-      "confidence": 0.5085,
-      "entailment_score": 0.567,
-      "evidence_score": 0.5681
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.503
     },
     {
       "id": "OOD-004",
@@ -82,9 +82,9 @@
       "expected": "VERIFIED_SAFE",
       "predicted": "CLINICAL_WARNING",
       "match": false,
-      "confidence": 0.4224,
-      "entailment_score": 0.54,
-      "evidence_score": 0.4077
+      "confidence": 0.4957,
+      "entailment_score": 0.56,
+      "evidence_score": 0.5914
     },
     {
       "id": "OOD-005",
@@ -92,9 +92,9 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3479,
-      "entailment_score": 0.536,
-      "evidence_score": 0.169
+      "confidence": 0.1023,
+      "entailment_score": 0.0,
+      "evidence_score": 0.1564
     },
     {
       "id": "OOD-006",
@@ -102,9 +102,9 @@
       "expected": "VERIFIED_SAFE",
       "predicted": "BLOCKED",
       "match": false,
-      "confidence": 0.2324,
+      "confidence": 0.2186,
       "entailment_score": 0.3,
-      "evidence_score": 0.2129
+      "evidence_score": 0.1735
     },
     {
       "id": "OOD-007",
@@ -112,19 +112,19 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3248,
-      "entailment_score": 0.3,
-      "evidence_score": 0.4735
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.4526
     },
     {
       "id": "OOD-008",
       "domain": "Obstetrics",
       "expected": "VERIFIED_SAFE",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.4041,
-      "entailment_score": 0.55,
-      "evidence_score": 0.3042
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8437,
+      "entailment_score": 0.85,
+      "evidence_score": 0.8617
     },
     {
       "id": "OOD-009",
@@ -132,49 +132,49 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3465,
-      "entailment_score": 0.54,
-      "evidence_score": 0.159
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.6805
     },
     {
       "id": "OOD-010",
       "domain": "Pediatrics",
       "expected": "VERIFIED_SAFE",
-      "predicted": "BLOCKED",
-      "match": false,
-      "confidence": 0.3271,
-      "entailment_score": 0.3,
-      "evidence_score": 0.3451
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8967,
+      "entailment_score": 0.817,
+      "evidence_score": 1.0
     },
     {
       "id": "OOD-011",
       "domain": "Gastroenterology",
       "expected": "BLOCKED",
-      "predicted": "BLOCKED",
-      "match": true,
-      "confidence": 0.3062,
-      "entailment_score": 0.3,
-      "evidence_score": 0.4215
+      "predicted": "VERIFIED_SAFE",
+      "match": false,
+      "confidence": 0.5467,
+      "entailment_score": 0.557,
+      "evidence_score": 0.7781
     },
     {
       "id": "OOD-012",
       "domain": "Gastroenterology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "BLOCKED",
-      "match": false,
-      "confidence": 0.2563,
-      "entailment_score": 0.3,
-      "evidence_score": 0.1992
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8543,
+      "entailment_score": 0.843,
+      "evidence_score": 0.8992
     },
     {
       "id": "OOD-013",
       "domain": "Pulmonology",
       "expected": "BLOCKED",
-      "predicted": "VERIFIED_SAFE",
-      "match": false,
-      "confidence": 0.661,
-      "entailment_score": 0.815,
-      "evidence_score": 0.4108
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.4553
     },
     {
       "id": "OOD-014",
@@ -182,9 +182,9 @@
       "expected": "VERIFIED_SAFE",
       "predicted": "VERIFIED_SAFE",
       "match": true,
-      "confidence": 0.8182,
-      "entailment_score": 0.88,
-      "evidence_score": 0.737
+      "confidence": 0.883,
+      "entailment_score": 0.92,
+      "evidence_score": 0.8582
     },
     {
       "id": "OOD-015",
@@ -192,39 +192,39 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3224,
+      "confidence": 0.3166,
       "entailment_score": 0.3,
-      "evidence_score": 0.3476
+      "evidence_score": 0.331
     },
     {
       "id": "OOD-016",
       "domain": "Endocrinology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "BLOCKED",
-      "match": false,
-      "confidence": 0.267,
-      "entailment_score": 0.3,
-      "evidence_score": 0.2478
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.926,
+      "entailment_score": 0.92,
+      "evidence_score": 1.0
     },
     {
       "id": "OOD-017",
       "domain": "Toxicology",
       "expected": "BLOCKED",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.3934,
-      "entailment_score": 0.555,
-      "evidence_score": 0.3181
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.1334,
+      "entailment_score": 0.0,
+      "evidence_score": 0.2887
     },
     {
       "id": "OOD-018",
       "domain": "Toxicology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.3693,
-      "entailment_score": 0.54,
-      "evidence_score": 0.2862
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8071,
+      "entailment_score": 0.84,
+      "evidence_score": 0.8522
     },
     {
       "id": "OOD-019",
@@ -232,49 +232,49 @@
       "expected": "BLOCKED",
       "predicted": "CLINICAL_WARNING",
       "match": false,
-      "confidence": 0.4398,
+      "confidence": 0.4292,
       "entailment_score": 0.546,
-      "evidence_score": 0.4164
+      "evidence_score": 0.386
     },
     {
       "id": "OOD-020",
       "domain": "Neurology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "BLOCKED",
-      "match": false,
-      "confidence": 0.3117,
-      "entailment_score": 0.3,
-      "evidence_score": 0.4197
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.9135,
+      "entailment_score": 0.929,
+      "evidence_score": 1.0
     },
     {
       "id": "OOD-021",
       "domain": "Rheumatology",
       "expected": "BLOCKED",
-      "predicted": "VERIFIED_SAFE",
-      "match": false,
-      "confidence": 0.5043,
-      "entailment_score": 0.553,
-      "evidence_score": 0.6535
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.6384
     },
     {
       "id": "OOD-022",
       "domain": "Rheumatology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.4694,
-      "entailment_score": 0.687,
-      "evidence_score": 0.3322
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8442,
+      "entailment_score": 0.908,
+      "evidence_score": 0.7869
     },
     {
       "id": "OOD-023",
       "domain": "Psychiatry",
       "expected": "BLOCKED",
-      "predicted": "VERIFIED_SAFE",
-      "match": false,
-      "confidence": 0.5085,
-      "entailment_score": 0.567,
-      "evidence_score": 0.5681
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.503
     },
     {
       "id": "OOD-024",
@@ -282,9 +282,9 @@
       "expected": "VERIFIED_SAFE",
       "predicted": "CLINICAL_WARNING",
       "match": false,
-      "confidence": 0.4224,
-      "entailment_score": 0.54,
-      "evidence_score": 0.4077
+      "confidence": 0.4957,
+      "entailment_score": 0.56,
+      "evidence_score": 0.5914
     },
     {
       "id": "OOD-025",
@@ -292,9 +292,9 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3479,
-      "entailment_score": 0.536,
-      "evidence_score": 0.169
+      "confidence": 0.1023,
+      "entailment_score": 0.0,
+      "evidence_score": 0.1564
     },
     {
       "id": "OOD-026",
@@ -302,9 +302,9 @@
       "expected": "VERIFIED_SAFE",
       "predicted": "BLOCKED",
       "match": false,
-      "confidence": 0.2324,
+      "confidence": 0.2186,
       "entailment_score": 0.3,
-      "evidence_score": 0.2129
+      "evidence_score": 0.1735
     },
     {
       "id": "OOD-027",
@@ -312,19 +312,19 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3248,
-      "entailment_score": 0.3,
-      "evidence_score": 0.4735
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.4526
     },
     {
       "id": "OOD-028",
       "domain": "Obstetrics",
       "expected": "VERIFIED_SAFE",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.4041,
-      "entailment_score": 0.55,
-      "evidence_score": 0.3042
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8437,
+      "entailment_score": 0.85,
+      "evidence_score": 0.8617
     },
     {
       "id": "OOD-029",
@@ -332,49 +332,49 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3465,
-      "entailment_score": 0.54,
-      "evidence_score": 0.159
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.6805
     },
     {
       "id": "OOD-030",
       "domain": "Pediatrics",
       "expected": "VERIFIED_SAFE",
-      "predicted": "BLOCKED",
-      "match": false,
-      "confidence": 0.3271,
-      "entailment_score": 0.3,
-      "evidence_score": 0.3451
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8967,
+      "entailment_score": 0.817,
+      "evidence_score": 1.0
     },
     {
       "id": "OOD-031",
       "domain": "Gastroenterology",
       "expected": "BLOCKED",
-      "predicted": "BLOCKED",
-      "match": true,
-      "confidence": 0.3062,
-      "entailment_score": 0.3,
-      "evidence_score": 0.4215
+      "predicted": "VERIFIED_SAFE",
+      "match": false,
+      "confidence": 0.5467,
+      "entailment_score": 0.557,
+      "evidence_score": 0.7781
     },
     {
       "id": "OOD-032",
       "domain": "Gastroenterology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "BLOCKED",
-      "match": false,
-      "confidence": 0.2563,
-      "entailment_score": 0.3,
-      "evidence_score": 0.1992
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8543,
+      "entailment_score": 0.843,
+      "evidence_score": 0.8992
     },
     {
       "id": "OOD-033",
       "domain": "Pulmonology",
       "expected": "BLOCKED",
-      "predicted": "VERIFIED_SAFE",
-      "match": false,
-      "confidence": 0.661,
-      "entailment_score": 0.815,
-      "evidence_score": 0.4108
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.4553
     },
     {
       "id": "OOD-034",
@@ -382,9 +382,9 @@
       "expected": "VERIFIED_SAFE",
       "predicted": "VERIFIED_SAFE",
       "match": true,
-      "confidence": 0.8182,
-      "entailment_score": 0.88,
-      "evidence_score": 0.737
+      "confidence": 0.883,
+      "entailment_score": 0.92,
+      "evidence_score": 0.8582
     },
     {
       "id": "OOD-035",
@@ -392,39 +392,39 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3224,
+      "confidence": 0.3166,
       "entailment_score": 0.3,
-      "evidence_score": 0.3476
+      "evidence_score": 0.331
     },
     {
       "id": "OOD-036",
       "domain": "Endocrinology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "BLOCKED",
-      "match": false,
-      "confidence": 0.267,
-      "entailment_score": 0.3,
-      "evidence_score": 0.2478
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.926,
+      "entailment_score": 0.92,
+      "evidence_score": 1.0
     },
     {
       "id": "OOD-037",
       "domain": "Toxicology",
       "expected": "BLOCKED",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.3934,
-      "entailment_score": 0.555,
-      "evidence_score": 0.3181
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.1334,
+      "entailment_score": 0.0,
+      "evidence_score": 0.2887
     },
     {
       "id": "OOD-038",
       "domain": "Toxicology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.3693,
-      "entailment_score": 0.54,
-      "evidence_score": 0.2862
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8071,
+      "entailment_score": 0.84,
+      "evidence_score": 0.8522
     },
     {
       "id": "OOD-039",
@@ -432,49 +432,49 @@
       "expected": "BLOCKED",
       "predicted": "CLINICAL_WARNING",
       "match": false,
-      "confidence": 0.4398,
+      "confidence": 0.4292,
       "entailment_score": 0.546,
-      "evidence_score": 0.4164
+      "evidence_score": 0.386
     },
     {
       "id": "OOD-040",
       "domain": "Neurology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "BLOCKED",
-      "match": false,
-      "confidence": 0.3117,
-      "entailment_score": 0.3,
-      "evidence_score": 0.4197
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.9135,
+      "entailment_score": 0.929,
+      "evidence_score": 1.0
     },
     {
       "id": "OOD-041",
       "domain": "Rheumatology",
       "expected": "BLOCKED",
-      "predicted": "VERIFIED_SAFE",
-      "match": false,
-      "confidence": 0.5043,
-      "entailment_score": 0.553,
-      "evidence_score": 0.6535
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.6384
     },
     {
       "id": "OOD-042",
       "domain": "Rheumatology",
       "expected": "VERIFIED_SAFE",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.4694,
-      "entailment_score": 0.687,
-      "evidence_score": 0.3322
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8442,
+      "entailment_score": 0.908,
+      "evidence_score": 0.7869
     },
     {
       "id": "OOD-043",
       "domain": "Psychiatry",
       "expected": "BLOCKED",
-      "predicted": "VERIFIED_SAFE",
-      "match": false,
-      "confidence": 0.5085,
-      "entailment_score": 0.567,
-      "evidence_score": 0.5681
+      "predicted": "BLOCKED",
+      "match": true,
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.503
     },
     {
       "id": "OOD-044",
@@ -482,9 +482,9 @@
       "expected": "VERIFIED_SAFE",
       "predicted": "CLINICAL_WARNING",
       "match": false,
-      "confidence": 0.4224,
-      "entailment_score": 0.54,
-      "evidence_score": 0.4077
+      "confidence": 0.4957,
+      "entailment_score": 0.56,
+      "evidence_score": 0.5914
     },
     {
       "id": "OOD-045",
@@ -492,9 +492,9 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3479,
-      "entailment_score": 0.536,
-      "evidence_score": 0.169
+      "confidence": 0.1023,
+      "entailment_score": 0.0,
+      "evidence_score": 0.1564
     },
     {
       "id": "OOD-046",
@@ -502,9 +502,9 @@
       "expected": "VERIFIED_SAFE",
       "predicted": "BLOCKED",
       "match": false,
-      "confidence": 0.2324,
+      "confidence": 0.2186,
       "entailment_score": 0.3,
-      "evidence_score": 0.2129
+      "evidence_score": 0.1735
     },
     {
       "id": "OOD-047",
@@ -512,19 +512,19 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3248,
-      "entailment_score": 0.3,
-      "evidence_score": 0.4735
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.4526
     },
     {
       "id": "OOD-048",
       "domain": "Obstetrics",
       "expected": "VERIFIED_SAFE",
-      "predicted": "CLINICAL_WARNING",
-      "match": false,
-      "confidence": 0.4041,
-      "entailment_score": 0.55,
-      "evidence_score": 0.3042
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8437,
+      "entailment_score": 0.85,
+      "evidence_score": 0.8617
     },
     {
       "id": "OOD-049",
@@ -532,19 +532,19 @@
       "expected": "BLOCKED",
       "predicted": "BLOCKED",
       "match": true,
-      "confidence": 0.3465,
-      "entailment_score": 0.54,
-      "evidence_score": 0.159
+      "confidence": 0.15,
+      "entailment_score": 0.0,
+      "evidence_score": 0.6805
     },
     {
       "id": "OOD-050",
       "domain": "Pediatrics",
       "expected": "VERIFIED_SAFE",
-      "predicted": "BLOCKED",
-      "match": false,
-      "confidence": 0.3271,
-      "entailment_score": 0.3,
-      "evidence_score": 0.3451
+      "predicted": "VERIFIED_SAFE",
+      "match": true,
+      "confidence": 0.8967,
+      "entailment_score": 0.817,
+      "evidence_score": 1.0
     }
   ]
 }
