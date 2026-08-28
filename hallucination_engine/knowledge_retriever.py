@@ -153,14 +153,74 @@ VERIFIED_MEDICAL_CORPUS = [
         "content": "In severe hyperkalemia with peaked T waves or widened QRS, IV Calcium Gluconate (10% 10 mL over 2-3 min) must be given immediately for myocardial membrane stabilization. "
                    "Follow with IV Regular Insulin 10 units with 50% Dextrose (D50W) and nebulized Albuterol to drive potassium into the intracellular compartment.",
         "url": "https://pubmed.ncbi.nlm.nih.gov/31778947/"
+    },
+    {
+        "source_id": "PMID:24222018",
+        "title": "2013 ACCF/AHA Guideline for the Management of ST-Elevation Myocardial Infarction",
+        "category": "Cardiology",
+        "content": "Post-STEMI secondary prevention: Dual antiplatelet therapy (Aspirin 81 mg daily plus a P2Y12 inhibitor such as Ticagrelor 90 mg BID or Clopidogrel 75 mg daily) is indicated for at least 12 months. "
+                   "High-intensity statin therapy (Atorvastatin 80 mg or Rosuvastatin 40 mg) should be initiated targeting LDL-C < 55 mg/dL alongside beta-blockers and ACEi/ARB for LVEF < 40%.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24222018/"
+    },
+    {
+        "source_id": "PMID:33218228",
+        "title": "2020 AHA/ACC Guideline for the Diagnosis and Treatment of Patients With Hypertrophic Cardiomyopathy",
+        "category": "Cardiology",
+        "content": "In symptomatic obstructive HCM (HOCM) with resting or provoked LVOT gradient >= 50 mmHg, non-vasodilating beta-blockers (titrated to HR 60-65) or nondihydropyridine CCBs (Verapamil) are first-line. "
+                   "Digoxin, positive inotropic drugs, pure vasodilators, and high-dose diuretics are strictly contraindicated as they increase left ventricular outflow obstruction.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33218228/"
+    },
+    {
+        "source_id": "PMID:29462276",
+        "title": "Clinical Practice Guidelines for Clostridium difficile Infection in Adults and Children: 2017 Update by IDSA/SHEA",
+        "category": "Infectious Disease",
+        "content": "First-line therapy for initial episode of non-severe or severe C. difficile infection is oral Fidaxomicin (200 mg BID for 10 days) or oral Vancomycin (125 mg 4 times daily for 10 days). "
+                   "Antiperistaltic and antimotility agents (such as loperamide) should be avoided as they may obscure symptoms and precipitate toxic megacolon.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/29462276/"
+    },
+    {
+        "source_id": "PMID:35579034",
+        "title": "2022 Guideline for the Management of Patients With Spontaneous Intracranial Hemorrhage",
+        "category": "Neurology & Critical Care",
+        "content": "In acute spontaneous intracranial hemorrhage (ICH), immediate reversal of anticoagulation is mandatory. Therapeutic anticoagulants (heparin, DOACs, warfarin) are contraindicated during the acute hematoma expansion phase. "
+                   "Intensive systolic blood pressure lowering to a target between 130-140 mmHg is safe and recommended.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35579034/"
     }
 ]
+
+
+# Medical Semantic Synonyms Dictionary for clinical concept expansion
+MEDICAL_SYNONYM_MAP = {
+    "adrenaline": "epinephrine",
+    "stemi": "myocardial infarction",
+    "heart attack": "myocardial infarction",
+    "stroke": "ischemic stroke thrombolysis",
+    "tpa": "alteplase thrombolysis",
+    "tenecteplase": "alteplase thrombolysis",
+    "dapt": "dual antiplatelet therapy ticagrelor clopidogrel",
+    "arni": "sacubitril valsartan",
+    "sglt2": "dapagliflozin empagliflozin",
+    "sglt2i": "dapagliflozin empagliflozin",
+    "doac": "apixaban rivaroxaban dabigatran direct oral anticoagulant",
+    "noac": "apixaban rivaroxaban dabigatran direct oral anticoagulant",
+    "dka": "diabetic ketoacidosis",
+    "nac": "n-acetylcysteine paracetamol acetaminophen",
+    "c. diff": "clostridioides difficile colitis fidaxomicin vancomycin",
+    "c diff": "clostridioides difficile colitis fidaxomicin vancomycin",
+    "sepsis": "septic shock norepinephrine crystalloid broad-spectrum",
+    "status epilepticus": "lorazepam midazolam levetiracetam fosphenytoin convulsive",
+    "hyperkalemia": "calcium gluconate insulin dextrose potassium",
+    "hyperkalaemia": "calcium gluconate insulin dextrose potassium",
+    "graves": "methimazole hyperthyroidism propranolol thionamide",
+    "pyelonephritis": "ciprofloxacin levofloxacin trimethoprim sulfamethoxazole",
+    "anaphylaxis": "epinephrine adrenaline intramuscular thigh"
+}
 
 
 class MedicalKnowledgeRetriever:
     """
     Retrieves evidence documents and guidelines matching clinical queries or LLM claims.
-    Uses TF-IDF tokenization and Cosine Vector Relevance ranking.
+    Uses Semantic Concept Expansion, TF-IDF tokenization and Cosine Vector Relevance ranking.
     """
 
     def __init__(self, custom_corpus: Optional[List[Dict[str, str]]] = None):
@@ -168,7 +228,15 @@ class MedicalKnowledgeRetriever:
         self._build_index()
 
     def _tokenize(self, text: str) -> List[str]:
-        words = re.findall(r'[a-zA-Z0-9\-\_]+', text.lower())
+        text_lower = text.lower()
+        
+        # Concept expansion
+        expanded_text = text_lower
+        for concept, expansion in MEDICAL_SYNONYM_MAP.items():
+            if concept in text_lower:
+                expanded_text += f" {expansion}"
+                
+        words = re.findall(r'[a-zA-Z0-9\-\_]+', expanded_text)
         # Filter out common stop words
         stopwords = {"the", "a", "an", "is", "in", "for", "where", "with", "and", "or", "to", "of", "on", "at", "by", "from", "be"}
         return [w for w in words if len(w) > 2 and w not in stopwords]

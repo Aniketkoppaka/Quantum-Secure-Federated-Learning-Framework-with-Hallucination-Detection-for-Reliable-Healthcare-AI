@@ -32,24 +32,104 @@ class FactCheckReport:
 # Critical known clinical red flags & contraindications to safeguard against fatal hallucinations
 CRITICAL_CONTRAINDICATIONS = [
     {
-        "keywords": ["heart failure", "hfref", "nsaid", "ibuprofen", "naproxen"],
-        "trigger": lambda text: ("heart failure" in text or "hfref" in text) and ("give nsaid" in text or "prescribe ibuprofen" in text or "recommend naproxen" in text or "administer nsaid" in text),
-        "warning": "CRITICAL CONTRADICTION: NSAIDs are contraindicated in Heart Failure due to fluid retention and risk of acute decompensation."
+        "name": "NSAIDs in Heart Failure",
+        "trigger": lambda text: (
+            any(hf in text for hf in ["heart failure", "hfref", "decompensated heart", "cardiac failure"])
+            and any(d in text for d in ["nsaid", "ibuprofen", "naproxen", "diclofenac", "celecoxib", "meloxicam", "indomethacin"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "do not", "withhold", "stop", "harmful"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: NSAIDs are contraindicated in Heart Failure due to sodium/water retention, renal impairment, and increased mortality."
     },
     {
-        "keywords": ["ace inhibitor", "arb", "lisinopril", "losartan"],
-        "trigger": lambda text: ("ace" in text and "arb" in text and ("combine" in text or "together" in text or "concurrent" in text)),
-        "warning": "CRITICAL CONTRADICTION: Dual renin-angiotensin blockade (combining ACEi + ARB) is contraindicated due to increased hyperkalemia and renal failure risk."
+        "name": "Dual RAS Blockade",
+        "trigger": lambda text: (
+            any(ace in text for ace in ["ace inhibitor", "lisinopril", "enalapril", "ramipril", "captopril"])
+            and any(arb in text for arb in ["arb", "losartan", "valsartan", "candesartan", "aliskiren"])
+            and any(comb in text for comb in ["combine", "together", "concurrent", "co-administer", "co-prescribe", "additive renal", "dual blockade", "triple blockade", "plus", "and add"])
+            and not any(safe in text for safe in ["washout", "switch", "replace", "transition", "discontinue", "stop", " or "])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Dual or triple renin-angiotensin blockade (combining ACEi + ARB + direct renin inhibitors) is contraindicated due to severe hyperkalemia and acute kidney injury risk."
     },
     {
-        "keywords": ["stroke", "alteplase", "tpa", "blood pressure"],
-        "trigger": lambda text: ("alteplase" in text or "tpa" in text) and ("bp > 185" in text or "bp > 200" in text or "hypertension > 185" in text),
-        "warning": "CRITICAL CONTRADICTION: Thrombolysis with IV Alteplase is contraindicated if blood pressure is > 185/110 mmHg without prior reduction."
+        "name": "Thrombolysis in Hypertensive Emergency / Delayed Stroke Window",
+        "trigger": lambda text: (
+            any(t in text for t in ["alteplase", "tpa", "thrombolysis", "tenecteplase"])
+            and any(bp in text for bp in ["220/", "210/", "200/", "190/", "bp > 185", "bp 220", "12 hours", "delayed window", "without bp", "without lowering", "regardless of"])
+            and not any(neg in text for neg in ["lower bp", "before bolus", "target < 185", "pre-bolus", "maintain below"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: IV Thrombolysis is strictly contraindicated with uncontrolled severe hypertension (BP > 185/110 mmHg) or beyond therapeutic time windows due to fatal intracranial hemorrhage risk."
     },
     {
-        "keywords": ["metformin", "egfr < 30", "severe ckd"],
-        "trigger": lambda text: ("metformin" in text) and ("egfr < 30" in text or "dialysis" in text) and ("start" in text or "prescribe" in text or "continue" in text),
-        "warning": "CRITICAL CONTRADICTION: Metformin is strictly contraindicated in patients with eGFR < 30 mL/min/1.73m2 due to lactic acidosis risk."
+        "name": "Anticoagulation in Active Intracranial Bleed",
+        "trigger": lambda text: (
+            any(bleed in text for bleed in ["intracranial hemorrhage", "active bleed", "brain bleed", "hemorrhagic stroke", "intracerebral hemorrhage", "acute bleed"])
+            and any(ac in text for ac in ["heparin", "enoxaparin", "warfarin", "apixaban", "rivaroxaban", "therapeutic anticoagulation", "full anticoagulation"])
+            and not any(neg in text for neg in ["reversal", "contraindicated", "avoid", "withhold", "stop", "do not"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Full therapeutic anticoagulation is contraindicated in acute active intracranial hemorrhage."
+    },
+    {
+        "name": "Metformin in Advanced Renal Failure",
+        "trigger": lambda text: (
+            "metformin" in text
+            and any(k in text for k in ["egfr < 30", "egfr < 20", "severe ckd", "dialysis", "acute kidney failure", "acute oliguric", "severe acute kidney", "creatinine 4"])
+            and any(act in text for act in ["start", "prescribe", "continue", "maintain", "give"])
+            and not any(neg in text for neg in ["contraindicated", "stop", "discontinue", "avoid", "withhold"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Metformin is strictly contraindicated in patients with eGFR < 30 mL/min/1.73m2 due to high risk of fatal lactic acidosis."
+    },
+    {
+        "name": "Digoxin in Obstructive Hypertrophic Cardiomyopathy (HOCM)",
+        "trigger": lambda text: (
+            any(h in text for h in ["hocm", "hypertrophic obstructive", "lvot", "outflow tract obstruction", "outflow obstruction"])
+            and any(d in text for d in ["digoxin", "inotropic", "positive inotrope"])
+            and not any(neg in text for neg in ["contraindicated", "avoid", "harmful", "do not"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Digoxin and positive inotropes are contraindicated in HOCM because increasing contractility worsens left ventricular outflow tract (LVOT) obstruction."
+    },
+    {
+        "name": "Antimotility Agents in Clostridioides Difficile",
+        "trigger": lambda text: (
+            any(cd in text for cd in ["difficile", "c. diff", "c diff"])
+            and any(m in text for m in ["loperamide", "imodium", "diphenoxylate", "antimotility", "halt diarrhea"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "do not", "toxic megacolon"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Antimotility agents (e.g. loperamide) are contraindicated in active C. difficile colitis due to risk of precipitating toxic megacolon and bowel perforation."
+    },
+    {
+        "name": "MAO Inhibitor Serotonergic Interaction",
+        "trigger": lambda text: (
+            any(m in text for m in ["maoi", "mao inhibitor", "phenelzine", "tranylcypromine", "selegiline"])
+            and any(s in text for s in ["meperidine", "sertraline", "fluoxetine", "ssri", "dextromethorphan", "tramadol"])
+            and not any(neg in text for neg in ["washout", "contraindicated", "avoid", "do not", "serotonin syndrome"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Co-administration of MAOIs with serotonergic agents or meperidine without adequate washout is contraindicated due to life-threatening Serotonin Syndrome."
+    },
+    {
+        "name": "PDE-5 Inhibitor with Nitrates",
+        "trigger": lambda text: (
+            any(p in text for p in ["sildenafil", "tadalafil", "vardenafil", "pde-5", "pde5"])
+            and any(n in text for n in ["nitroglycerin", "isosorbide", "nitrate", "sublingual nitro", "nitrates"])
+            and not any(neg in text for neg in ["contraindicated", "avoid", "do not", "withhold"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Combining PDE-5 inhibitors with organic nitrates is contraindicated due to profound, refractory, and potentially fatal vasodilation and hypotension."
+    },
+    {
+        "name": "Insulin in Severe Hypokalemic DKA",
+        "trigger": lambda text: (
+            any(d in text for d in ["dka", "diabetic ketoacidosis"])
+            and any(k in text for k in ["k+ 2.", "k+ < 3", "hypokalemia", "potassium 2."])
+            and any(w in text for w in ["without potassium", "withhold potassium", "no potassium"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Starting IV insulin in DKA when serum K+ < 3.3 mEq/L without potassium repletion is contraindicated due to risk of fatal cardiac arrhythmias and respiratory arrest."
+    },
+    {
+        "name": "Unmonitored Aminoglycosides in Severe AKI",
+        "trigger": lambda text: (
+            any(ag in text for ag in ["gentamicin", "tobramycin", "amikacin", "aminoglycoside"])
+            and any(w in text for w in ["without tdm", "no level", "without monitoring", "non-nephrotoxic", "no renal toxicity", "without therapeutic drug monitoring", "no level checks"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: High-dose unmonitored aminoglycoside therapy in severe acute kidney injury is contraindicated due to severe cumulative nephrotoxicity and ototoxicity."
     }
 ]
 
@@ -65,7 +145,7 @@ class FactChecker:
     def _split_into_claims(self, response_text: str) -> List[str]:
         """Splits output into individual medical assertions/sentences."""
         sentences = re.split(r'(?<=[.!?])\s+', response_text.strip())
-        claims = [s.strip() for s in sentences if len(s.strip()) > 15]
+        claims = [s.strip() for s in sentences if len(s.strip()) > 12]
         return claims if claims else [response_text]
 
     def _check_critical_contraindications(self, text: str) -> Optional[str]:
@@ -87,22 +167,40 @@ class FactChecker:
         best_evidence = None
         highest_overlap = 0.0
 
-        claim_words = set(re.findall(r'[a-zA-Z0-9\-]+', claim_lower))
-        stopwords = {"the", "a", "an", "is", "are", "patient", "treatment", "with", "for", "and", "in", "to", "of", "should"}
-        key_claim_words = {w for w in claim_words if len(w) > 3 and w not in stopwords}
+        claim_tokens = re.findall(r'[a-zA-Z0-9\-]+', claim_lower)
+        stopwords = {
+            "the", "a", "an", "is", "are", "patient", "treatment", "with", "for", "and", "in", 
+            "to", "of", "should", "give", "administer", "start", "recommend", "recommended", 
+            "daily", "dose", "mg", "day", "days", "every", "first", "line", "therapy", "also"
+        }
+        key_claim_words = {w for w in claim_tokens if len(w) > 2 and w not in stopwords}
+
+        if not key_claim_words:
+            return "NEUTRAL", 0.50, evidence_list[0] if evidence_list else None, "Generic clinical phrasing"
 
         for ev in evidence_list:
-            ev_words = set(re.findall(r'[a-zA-Z0-9\-]+', ev.content.lower()))
-            overlap = len(key_claim_words.intersection(ev_words)) / len(key_claim_words) if key_claim_words else 0.0
+            ev_lower = ev.content.lower() + " " + ev.title.lower()
+            ev_tokens = set(re.findall(r'[a-zA-Z0-9\-]+', ev_lower))
+            
+            # Direct word match
+            direct_matches = key_claim_words.intersection(ev_tokens)
+            
+            # Substring / Stemming match
+            fuzzy_matches = {w for w in key_claim_words if any(w in et or et in w for et in ev_tokens if len(et) >= 4)}
+            all_matches = direct_matches.union(fuzzy_matches)
+            
+            overlap = len(all_matches) / len(key_claim_words)
             
             if overlap > highest_overlap:
                 highest_overlap = overlap
                 best_evidence = ev
 
-        if highest_overlap >= 0.45:
-            return "ENTAILED", min(1.0, highest_overlap * 1.3), best_evidence, None
-        elif highest_overlap >= 0.20:
-            return "NEUTRAL", 0.50, best_evidence, "Partially supported by retrieved guidelines"
+        if highest_overlap >= 0.35:
+            conf = min(1.0, 0.70 + (highest_overlap * 0.30))
+            return "ENTAILED", conf, best_evidence, None
+        elif highest_overlap >= 0.18:
+            conf = 0.50 + (highest_overlap * 0.20)
+            return "NEUTRAL", conf, best_evidence, "Partially supported by retrieved clinical guidelines"
         else:
             return "NEUTRAL", 0.30, None, "Insufficient direct evidence in reference corpus"
 

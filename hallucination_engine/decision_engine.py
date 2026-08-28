@@ -100,9 +100,14 @@ class HallucinationDecisionEngine:
         fact_report = self.fact_checker.check_factual_accuracy(primary_response, evidence_list)
         s_ent = fact_report.overall_factual_score
 
-        # 4. Composite Confidence Score Calculation
-        # Weights: 40% Factual Entailment + 35% PubMed Retrieval Evidence + 25% Self-Consistency
-        composite_score = (0.40 * s_ent) + (0.35 * s_ret) + (0.25 * s_cons)
+        # 4. Composite Confidence Score Calculation (Evidence-Weighted Adaptive Gating)
+        # Combines Factual Entailment, PubMed Retrieval Evidence, and Self-Consistency Consensus
+        if s_ent >= 0.70 and s_ret >= 0.35:
+            # Strongly entailed with verified guideline support
+            base_score = 0.50 * s_ent + 0.30 * s_ret + 0.20 * s_cons
+            composite_score = min(1.0, base_score * 1.15)
+        else:
+            composite_score = (0.45 * s_ent) + (0.35 * s_ret) + (0.20 * s_cons)
 
         # Severe penalty if critical contraindication detected
         if fact_report.has_critical_contradiction:
