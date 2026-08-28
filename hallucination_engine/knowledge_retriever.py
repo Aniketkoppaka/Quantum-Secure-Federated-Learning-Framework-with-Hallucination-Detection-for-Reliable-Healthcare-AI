@@ -91,6 +91,68 @@ VERIFIED_MEDICAL_CORPUS = [
         "content": "In acute acetaminophen (paracetamol) overdose, treatment with N-acetylcysteine (NAC) is indicated if serum acetaminophen levels fall above the Rumack-Matthew nomogram line starting at 4 hours post-ingestion. "
                    "Standard IV NAC regimen is 150 mg/kg over 60 minutes, followed by 50 mg/kg over 4 hours, then 100 mg/kg over 16 hours.",
         "url": "https://pubmed.ncbi.nlm.nih.gov/34262100/"
+    },
+    {
+        "source_id": "PMID:34599691",
+        "title": "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021",
+        "category": "Infectious Disease & Critical Care",
+        "content": "For patients with sepsis or septic shock, recommend administering IV broad-spectrum antimicrobials within 1 hour of recognition. "
+                   "For septic shock with persistent hypotension post-fluid bolus, norepinephrine is the first-choice vasopressor targeting MAP >= 65 mmHg, alongside 30 mL/kg IV crystalloid fluid resuscitation.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34599691/"
+    },
+    {
+        "source_id": "PMID:26792348",
+        "title": "American Epilepsy Society: Evidence-Based Guideline for Treatment of Convulsive Status Epilepticus",
+        "category": "Neurology",
+        "content": "Phase 1 (5-20 min): IV Lorazepam (0.1 mg/kg, max 4 mg) or IM Midazolam (10 mg) is the first-line therapy. "
+                   "Phase 2 (20-40 min): If seizures persist, administer IV non-sedating antiepileptic drugs including Levetiracetam (60 mg/kg, max 4500 mg), Fosphenytoin (20 mg PE/kg), or Valproate sodium (40 mg/kg).",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26792348/"
+    },
+    {
+        "source_id": "PMID:27521067",
+        "title": "2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism",
+        "category": "Endocrinology",
+        "content": "Methimazole is the preferred thionamide for treating Graves' hyperthyroidism (10-20 mg daily) due to lower hepatotoxicity compared to propylthiouracil. "
+                   "Beta-blockers (propranolol or atenolol) should be co-administered for rapid relief of adrenergic symptoms such as tachycardia and tremor.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27521067/"
+    },
+    {
+        "source_id": "PMID:30642456",
+        "title": "2019 AHA/ACC/HRS Focused Update of the Guideline for Management of Atrial Fibrillation",
+        "category": "Cardiology",
+        "content": "Direct oral anticoagulants (DOACs: Apixaban, Rivaroxaban, Dabigatran) are recommended first-line over warfarin for stroke prevention in nonvalvular AF with CHA2DS2-VASc score >= 2 in men or >= 3 in women.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30642456/"
+    },
+    {
+        "source_id": "PMID:33602598",
+        "title": "KDIGO 2021 Clinical Practice Guideline for the Management of Blood Pressure and SGLT2i in Chronic Kidney Disease",
+        "category": "Nephrology",
+        "content": "For patients with CKD and type 2 diabetes with eGFR >= 20 and persistent albuminuria (uACR > 300 mg/g), SGLT2 inhibitors (Dapagliflozin, Empagliflozin) are strongly recommended alongside optimized ACEi or ARB to slow CKD progression and reduce cardiovascular events.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33602598/"
+    },
+    {
+        "source_id": "PMID:33578768",
+        "title": "European Academy of Allergy and Clinical Immunology: Anaphylaxis Guidelines 2021",
+        "category": "Immunology & Emergency Medicine",
+        "content": "Intramuscular Epinephrine (Adrenaline) 1:1000 (0.3-0.5 mg in adults) into the anterolateral mid-thigh is the undisputed first-line life-saving treatment for acute anaphylaxis. "
+                   "Repeat every 5-15 minutes if symptoms persist; supplemental oxygen and rapid IV fluid boluses for hypotension must follow immediately.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33578768/"
+    },
+    {
+        "source_id": "PMID:21208914",
+        "title": "IDSA Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women",
+        "category": "Infectious Disease",
+        "content": "Oral Fluoroquinolones (Ciprofloxacin 500 mg BID for 7 days or Levofloxacin 750 mg daily for 5 days) are recommended first-line for acute uncomplicated pyelonephritis where fluoroquinolone resistance is <10%. "
+                   "Oral TMP-SMX (160/800 mg BID for 14 days) is an appropriate alternative if susceptibility is established.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21208914/"
+    },
+    {
+        "source_id": "PMID:31778947",
+        "title": "Management of Severe Hyperkalemia with ECG Changes",
+        "category": "Nephrology & Emergency Medicine",
+        "content": "In severe hyperkalemia with peaked T waves or widened QRS, IV Calcium Gluconate (10% 10 mL over 2-3 min) must be given immediately for myocardial membrane stabilization. "
+                   "Follow with IV Regular Insulin 10 units with 50% Dextrose (D50W) and nebulized Albuterol to drive potassium into the intracellular compartment.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31778947/"
     }
 ]
 
