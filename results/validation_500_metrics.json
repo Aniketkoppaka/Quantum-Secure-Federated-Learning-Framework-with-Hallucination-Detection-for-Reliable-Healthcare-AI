@@ -1,0 +1,128 @@
+{
+  "dataset_summary": {
+    "total_cases": 500,
+    "known_cases": 100,
+    "unseen_cases": 350,
+    "expert_cases": 50,
+    "runtime_seconds": 18.669
+  },
+  "overall_metrics": {
+    "accuracy": 0.494,
+    "macro_precision": 0.6467,
+    "macro_recall": 0.4943,
+    "macro_f1": 0.4786,
+    "safe_recall": 0.264,
+    "warning_recall": 0.766,
+    "blocked_recall": 0.453,
+    "hallucination_catch_rate": 0.453,
+    "false_safe_rate": 0.0171,
+    "false_block_rate": 0.056
+  },
+  "per_class_metrics": {
+    "VERIFIED_SAFE": {
+      "precision": 0.8684,
+      "recall": 0.264,
+      "f1": 0.4049,
+      "support": 125
+    },
+    "CLINICAL_WARNING": {
+      "precision": 0.3407,
+      "recall": 0.766,
+      "f1": 0.4716,
+      "support": 141
+    },
+    "BLOCKED": {
+      "precision": 0.731,
+      "recall": 0.453,
+      "f1": 0.5594,
+      "support": 234
+    }
+  },
+  "phase_breakdown": {
+    "known": {
+      "accuracy": 0.5,
+      "precision": [
+        1.0,
+        0.3,
+        0.5714285714285714
+      ],
+      "recall": [
+        0.6,
+        0.6,
+        0.4
+      ],
+      "macro_f1": 0.5401960784313725,
+      "warning_recall": 0.6,
+      "hallucination_catch_rate": 0.4,
+      "false_safe_rate": 0.0,
+      "false_block_rate": 0.2,
+      "adversarial_robustness_score": null,
+      "unseen_generalization_score": null
+    },
+    "unseen": {
+      "accuracy": 0.5,
+      "precision": [
+        1.0,
+        0.3459915611814346,
+        0.7894736842105263
+      ],
+      "recall": [
+        0.18,
+        0.82,
+        0.5
+      ],
+      "macro_f1": 0.4679921759982975,
+      "warning_recall": 0.82,
+      "hallucination_catch_rate": 0.5,
+      "false_safe_rate": 0.0,
+      "false_block_rate": 0.02,
+      "adversarial_robustness_score": null,
+      "unseen_generalization_score": null
+    },
+    "expert": {
+      "accuracy": 0.44,
+      "precision": [
+        0.0,
+        0.36666666666666664,
+        0.7333333333333333
+      ],
+      "recall": [
+        0.0,
+        0.6875,
+        0.3235294117647059
+      ],
+      "macro_f1": 0.3090801538006507,
+      "warning_recall": 0.6875,
+      "hallucination_catch_rate": 0.3235294117647059,
+      "false_safe_rate": 0.11764705882352941,
+      "false_block_rate": 0.0,
+      "adversarial_robustness_score": null,
+      "unseen_generalization_score": null
+    }
+  },
+  "prediction_distribution": {
+    "VERIFIED_SAFE": 38,
+    "CLINICAL_WARNING": 317,
+    "BLOCKED": 145
+  },
+  "ground_truth_distribution": {
+    "VERIFIED_SAFE": 125,
+    "CLINICAL_WARNING": 141,
+    "BLOCKED": 234
+  },
+  "nli_statistics": {
+    "entailment_count": 119,
+    "neutral_count": 1927,
+    "contradiction_count": 231,
+    "total_claims_evaluated": 2277
+  },
+  "telemetry_counters": {},
+  "error_transitions": {
+    "SAFE_to_WARNING": 85,
+    "SAFE_to_BLOCKED": 7,
+    "WARNING_to_SAFE": 1,
+    "WARNING_to_BLOCKED": 32,
+    "BLOCKED_to_WARNING": 124,
+    "BLOCKED_to_SAFE": 4
+  }
+}

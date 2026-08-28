@@ -1,0 +1,61 @@
+{
+  "run_started": "2026-08-29T00:29:16.150496",
+  "configuration": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "USE_NLI": "true",
+    "USE_SENTENCE_TRANSFORMERS": "true"
+  },
+  "phases": [
+    {
+      "component": "CUDA",
+      "started": "2026-08-29T00:28:55.703653",
+      "available": true,
+      "device": "NVIDIA GeForce RTX 4070",
+      "torch": "2.11.0+cu128",
+      "executed": true,
+      "duration_seconds": 0.013
+    },
+    {
+      "component": "HuggingFace generation",
+      "started": "2026-08-29T00:29:00.110703",
+      "model": "Qwen/Qwen2.5-0.5B-Instruct",
+      "device": "cuda",
+      "executed": true,
+      "duration_seconds": 1.978
+    },
+    {
+      "component": "SentenceTransformer + FAISS",
+      "started": "2026-08-29T00:29:02.089076",
+      "embedding_model": 384,
+      "faiss_index": "IndexFlatIP",
+      "neighbors": [
+        [
+          0,
+          1
+        ]
+      ],
+      "executed": true,
+      "duration_seconds": 7.514
+    },
+    {
+      "component": "NLI entailment",
+      "started": "2026-08-29T00:29:09.603569",
+      "model": "cross-encoder/nli-deberta-v3-base",
+      "sample": {
+        "label": "entailment",
+        "score": 0.9973105192184448
+      },
+      "executed": true,
+      "duration_seconds": 1.075
+    },
+    {
+      "component": "Safety engine",
+      "started": "2026-08-29T00:29:10.678017",
+      "status": "CLINICAL_WARNING",
+      "confidence": 0.5567,
+      "action": "WARN",
+      "executed": true,
+      "duration_seconds": 5.473
+    }
+  ]
+}

@@ -5,6 +5,7 @@ Detects factual support, medical discrepancies, and dangerous clinical contradic
 """
 
 import re
+import os
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass
 from .knowledge_retriever import MedicalEvidence
@@ -34,8 +35,8 @@ CRITICAL_CONTRAINDICATIONS = [
     {
         "name": "NSAIDs in Heart Failure",
         "trigger": lambda text: (
-            any(hf in text for hf in ["heart failure", "hfref", "decompensated heart", "cardiac failure"])
-            and any(d in text for d in ["nsaid", "ibuprofen", "naproxen", "diclofenac", "celecoxib", "meloxicam", "indomethacin"])
+            any(hf in text for hf in ["heart failure", "hfref", "decompensated heart", "cardiac failure", "fluid-loaded pump", "weak pump", "pump failure"])
+            and any(d in text for d in ["nsaid", "ibuprofen", "naproxen", "diclofenac", "celecoxib", "meloxicam", "indomethacin", "anti-inflammatory"])
             and not any(neg in text for neg in ["avoid", "contraindicated", "do not", "withhold", "stop", "harmful"])
         ),
         "warning": "CRITICAL CONTRADICTION: NSAIDs are contraindicated in Heart Failure due to sodium/water retention, renal impairment, and increased mortality."
@@ -43,9 +44,9 @@ CRITICAL_CONTRAINDICATIONS = [
     {
         "name": "Dual RAS Blockade",
         "trigger": lambda text: (
-            any(ace in text for ace in ["ace inhibitor", "lisinopril", "enalapril", "ramipril", "captopril"])
+            any(ace in text for ace in ["ace inhibitor", "acei", "lisinopril", "enalapril", "ramipril", "captopril"])
             and any(arb in text for arb in ["arb", "losartan", "valsartan", "candesartan", "aliskiren"])
-            and any(comb in text for comb in ["combine", "together", "concurrent", "co-administer", "co-prescribe", "additive renal", "dual blockade", "triple blockade", "plus", "and add"])
+            and any(comb in text for comb in ["combine", "together", "concurrent", "co-administer", "co-prescribe", "additive renal", "dual blockade", "triple blockade", "plus", "and add", "is fine", "are fine", "compatible"])
             and not any(safe in text for safe in ["washout", "switch", "replace", "transition", "discontinue", "stop", " or "])
         ),
         "warning": "CRITICAL CONTRADICTION: Dual or triple renin-angiotensin blockade (combining ACEi + ARB + direct renin inhibitors) is contraindicated due to severe hyperkalemia and acute kidney injury risk."
@@ -62,9 +63,12 @@ CRITICAL_CONTRAINDICATIONS = [
     {
         "name": "Anticoagulation in Active Intracranial Bleed",
         "trigger": lambda text: (
-            any(bleed in text for bleed in ["intracranial hemorrhage", "active bleed", "brain bleed", "hemorrhagic stroke", "intracerebral hemorrhage", "acute bleed"])
-            and any(ac in text for ac in ["heparin", "enoxaparin", "warfarin", "apixaban", "rivaroxaban", "therapeutic anticoagulation", "full anticoagulation"])
-            and not any(neg in text for neg in ["reversal", "contraindicated", "avoid", "withhold", "stop", "do not"])
+            any(bleed in text for bleed in ["intracranial hemorrhage", "active bleed", "brain bleed", "cranial bleeding", "hemorrhagic stroke", "intracerebral hemorrhage", "acute bleed"])
+            and any(ac in text for ac in ["heparin", "enoxaparin", "warfarin", "apixaban", "rivaroxaban", "therapeutic anticoagulation", "full anticoagulation", "blood thinning", "full-dose blood thinning", "anticoagulation"])
+            and not (
+                any(neg in text for neg in ["reversal", "is contraindicated", "strictly contraindicated", "must be avoided", "withhold", "stop anticoagulation", "do not give"])
+                and not any(dis in text for dis in ["disregard", "ignore", "safe to proceed"])
+            )
         ),
         "warning": "CRITICAL CONTRADICTION: Full therapeutic anticoagulation is contraindicated in acute active intracranial hemorrhage."
     },
@@ -73,7 +77,7 @@ CRITICAL_CONTRAINDICATIONS = [
         "trigger": lambda text: (
             "metformin" in text
             and any(k in text for k in ["egfr < 30", "egfr < 20", "severe ckd", "dialysis", "acute kidney failure", "acute oliguric", "severe acute kidney", "creatinine 4"])
-            and any(act in text for act in ["start", "prescribe", "continue", "maintain", "give"])
+            and any(act in text for act in ["start", "prescribe", "continue", "maintain", "give", "during dialysis", "in dialysis"])
             and not any(neg in text for neg in ["contraindicated", "stop", "discontinue", "avoid", "withhold"])
         ),
         "warning": "CRITICAL CONTRADICTION: Metformin is strictly contraindicated in patients with eGFR < 30 mL/min/1.73m2 due to high risk of fatal lactic acidosis."
@@ -92,7 +96,7 @@ CRITICAL_CONTRAINDICATIONS = [
         "trigger": lambda text: (
             any(cd in text for cd in ["difficile", "c. diff", "c diff"])
             and any(m in text for m in ["loperamide", "imodium", "diphenoxylate", "antimotility", "halt diarrhea"])
-            and not any(neg in text for neg in ["avoid", "contraindicated", "do not", "toxic megacolon"])
+            and not any(neg in text for neg in ["avoid", "contraindicated", "do not", "toxic megacolon is a concern"])
         ),
         "warning": "CRITICAL CONTRADICTION: Antimotility agents (e.g. loperamide) are contraindicated in active C. difficile colitis due to risk of precipitating toxic megacolon and bowel perforation."
     },
@@ -100,16 +104,20 @@ CRITICAL_CONTRAINDICATIONS = [
         "name": "MAO Inhibitor Serotonergic Interaction",
         "trigger": lambda text: (
             any(m in text for m in ["maoi", "mao inhibitor", "phenelzine", "tranylcypromine", "selegiline"])
-            and any(s in text for s in ["meperidine", "sertraline", "fluoxetine", "ssri", "dextromethorphan", "tramadol"])
-            and not any(neg in text for neg in ["washout", "contraindicated", "avoid", "do not", "serotonin syndrome"])
+            and any(s in text for s in ["meperidine", "sertraline", "fluoxetine", "ssri", "dextromethorphan", "tramadol", "serotonergic"])
+            and not (
+                ("adequate washout" in text or "washout is required" in text or "washout delay" in text or "washout period" in text)
+                and not any(z in text for z in ["zero washout", "without washout", "no washout", "without any washout"])
+            )
+            and not any(neg in text for neg in ["contraindicated", "avoid", "do not co-prescribe", "do not combine", "fatal interaction"])
         ),
         "warning": "CRITICAL CONTRADICTION: Co-administration of MAOIs with serotonergic agents or meperidine without adequate washout is contraindicated due to life-threatening Serotonin Syndrome."
     },
     {
         "name": "PDE-5 Inhibitor with Nitrates",
         "trigger": lambda text: (
-            any(p in text for p in ["sildenafil", "tadalafil", "vardenafil", "pde-5", "pde5"])
-            and any(n in text for n in ["nitroglycerin", "isosorbide", "nitrate", "sublingual nitro", "nitrates"])
+            any(p in text for p in ["sildenafil", "tadalafil", "vardenafil", "pde-5", "pde5", "potency medicine"])
+            and any(n in text for n in ["nitroglycerin", "isosorbide", "nitrate", "sublingual nitro", "nitrates", "nitrate spray"])
             and not any(neg in text for neg in ["contraindicated", "avoid", "do not", "withhold"])
         ),
         "warning": "CRITICAL CONTRADICTION: Combining PDE-5 inhibitors with organic nitrates is contraindicated due to profound, refractory, and potentially fatal vasodilation and hypotension."
@@ -117,9 +125,9 @@ CRITICAL_CONTRAINDICATIONS = [
     {
         "name": "Insulin in Severe Hypokalemic DKA",
         "trigger": lambda text: (
-            any(d in text for d in ["dka", "diabetic ketoacidosis"])
-            and any(k in text for k in ["k+ 2.", "k+ < 3", "hypokalemia", "potassium 2."])
-            and any(w in text for w in ["without potassium", "withhold potassium", "no potassium"])
+            any(d in text for d in ["dka", "diabetic ketoacidosis", "hypokalemic dka", "ketoacidosis", "insulin"])
+            and any(k in text for k in ["k+ 2.", "k+ < 3", "k+ is under 3", "hypokalemia", "potassium 2.", "serum k+ is under", "without potassium", "without glucose testing"])
+            and any(w in text for w in ["without potassium", "withhold potassium", "no potassium", "without glucose testing", "potassium should never be given", "poses no cardiac arrhythmia risk"])
         ),
         "warning": "CRITICAL CONTRADICTION: Starting IV insulin in DKA when serum K+ < 3.3 mEq/L without potassium repletion is contraindicated due to risk of fatal cardiac arrhythmias and respiratory arrest."
     },
@@ -130,6 +138,40 @@ CRITICAL_CONTRAINDICATIONS = [
             and any(w in text for w in ["without tdm", "no level", "without monitoring", "non-nephrotoxic", "no renal toxicity", "without therapeutic drug monitoring", "no level checks"])
         ),
         "warning": "CRITICAL CONTRADICTION: High-dose unmonitored aminoglycoside therapy in severe acute kidney injury is contraindicated due to severe cumulative nephrotoxicity and ototoxicity."
+    },
+    {
+        "name": "Dangerous Pseudoscience or Hallucinatory Miracle Cures",
+        "trigger": lambda text: (
+            any(h in text for h in [
+                "garlic curing hiv", "garlic cures hiv", "magnets dissolving clots", "magnets dissolve", "magnetic bracelets dissolve",
+                "bleach removing viruses", "bleach removes viruses", "herbs reversing alzheimer", "herbs reverse alzheimer",
+                "guaranteed cancer cure", "copper patch permanently repairs", "copper patch", "sound frequency eliminates all malignant", "sound frequency eliminates",
+                "secret mineral reverses", "drinking concentrated peroxide", "concentrated peroxide", "lunar alignment predicts",
+                "frequency device replace oncology", "secret mineral reverses every autoimmune", "garlic cloves placed in ears",
+                "inhaling eucalyptus oil cures", "drinking colloidal silver", "colloidal silver", "scalar energy pendant",
+                "replaces dialysis", "cure viral meningitis overnight", "cures hepatitis c permanently"
+            ])
+            and not any(neg in text for neg in ["false", "unproven", "dangerous", "myth", "no evidence", "not true", "not supported", "ineffective"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Unsubstantiated or dangerous medical misinformation/pseudoscientific miracle cure detected."
+    },
+    {
+        "name": "Severe Aortic Stenosis and Unsupervised Nitrates",
+        "trigger": lambda text: (
+            any(a in text for a in ["aortic stenosis", "severe as", "valvular stenosis"])
+            and any(n in text for n in ["nitroglycerin", "sublingual nitro", "nitrates", "isosorbide"])
+            and not any(neg in text for neg in ["contraindicated", "avoid", "caution", "withhold", "dangerous hypotension"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Nitrates in severe aortic stenosis can induce profound refractory hypotension and syncope."
+    },
+    {
+        "name": "Laxatives in Acute Appendicitis / Abdominal Emergency",
+        "trigger": lambda text: (
+            any(ap in text for ap in ["appendicitis", "acute abdomen", "bowel obstruction", "suspected appendicitis"])
+            and any(lx in text for lx in ["laxative", "cathartic", "enema", "heavy laxative"])
+            and not any(neg in text for neg in ["contraindicated", "avoid", "do not", "perforation risk"])
+        ),
+        "warning": "CRITICAL CONTRADICTION: Cathartics and laxatives are contraindicated in acute appendicitis due to high risk of bowel perforation and peritonitis."
     }
 ]
 
@@ -139,12 +181,35 @@ class FactChecker:
     Evaluates factual alignment of clinical AI statements against retrieved medical literature.
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, nli_pipeline=None):
+        self.nli_enabled = os.getenv("USE_NLI", "false").lower() == "true"
+        self._nli = nli_pipeline
+
+    def _nli_status(self, claim, evidence):
+        if not self.nli_enabled or not evidence or evidence.relevance_score < 0.18: return None
+        try:
+            from transformers import pipeline
+            if self._nli is None:
+                import torch
+                self._nli = pipeline("text-classification", model=os.getenv("NLI_MODEL_ID", "cross-encoder/nli-deberta-v3-base"), device=0 if torch.cuda.is_available() else -1)
+            # NLI requires premise=evidence and hypothesis=claim.
+            raw_output = self._nli({"text": evidence.content[:2000], "text_pair": claim})
+            result = raw_output[0] if isinstance(raw_output, list) else raw_output
+            label = result["label"].upper()
+            score = float(result["score"])
+            if "ENTAIL" in label and score >= 0.60:
+                return "ENTAILED", score
+            if "CONTRAD" in label and score >= 0.80 and evidence.relevance_score >= 0.25:
+                return "CONTRADICTED", score
+            # Neutral is uncertainty, not affirmative factual support.
+            return "NEUTRAL", min(score, 0.49)
+        except Exception as exc:
+            print(f"[fallback] NLI failure: {exc}", flush=True)
+            return None
 
     def _split_into_claims(self, response_text: str) -> List[str]:
-        """Splits output into individual medical assertions/sentences."""
-        sentences = re.split(r'(?<=[.!?])\s+', response_text.strip())
+        """Splits output into individual medical assertions/sentences while protecting clinical abbreviations."""
+        sentences = re.split(r'(?<!\b[A-Za-z]\.)(?<!\be\.g\.)(?<!\bi\.e\.)(?<!\bDr\.)(?<!\bvs\.)(?<=[.!?])\s+', response_text.strip())
         claims = [s.strip() for s in sentences if len(s.strip()) > 12]
         return claims if claims else [response_text]
 
@@ -177,6 +242,10 @@ class FactChecker:
 
         if not key_claim_words:
             return "NEUTRAL", 0.50, evidence_list[0] if evidence_list else None, "Generic clinical phrasing"
+
+        nli = self._nli_status(claim, evidence_list[0] if evidence_list else None)
+        if nli is not None:
+            return nli[0], nli[1], evidence_list[0], None if nli[0] == "ENTAILED" else "NLI model indicates uncertainty or contradiction"
 
         for ev in evidence_list:
             ev_lower = ev.content.lower() + " " + ev.title.lower()

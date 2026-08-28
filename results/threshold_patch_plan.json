@@ -1,0 +1,56 @@
+{
+  "classification_logic_modified": false,
+  "findings": {
+    "risk_inverted": false,
+    "risk_underweighted": true,
+    "nli_ignored": false,
+    "nli_overtrusted_for_safety": true,
+    "safe_threshold_too_low": "partially; not sufficient to fix confidence-1.0 unsafe cases",
+    "warning_unreachable": false,
+    "warning_bypass_for_high_support_cases": true
+  },
+  "current_formula": {
+    "support_score": "mean claim confidence from FactChecker",
+    "retrieval_score": "min(1.0, top_relevance * 1.4)",
+    "risk_score": "0.55*critical_contradiction + 0.25*(1-support) + 0.15*(1-retrieval) + 0.05*(1-consistency)",
+    "final_confidence_high_branch": "min(1.0, (0.50*support + 0.30*retrieval + 0.20*consistency)*1.15)",
+    "final_confidence_low_branch": "0.45*support + 0.35*retrieval + 0.20*consistency"
+  },
+  "observed_errors": {
+    "blocked_to_safe_audited": 10,
+    "warning_to_safe_audited": 10,
+    "balanced90_blocked_to_safe_total": 18,
+    "balanced90_warning_to_safe_total": 30
+  },
+  "patch_plan": [
+    {
+      "priority": 1,
+      "change": "Add a pre-SAFE safety veto for critical/emergency/contraindication context",
+      "expected_effect": "Reduce BLOCKED-to-SAFE errors",
+      "threshold_change": "none initially"
+    },
+    {
+      "priority": 2,
+      "change": "Treat unresolved high-confidence NEUTRAL NLI as WARNING or BLOCKED according to risk",
+      "expected_effect": "Reduce unsafe SAFE decisions caused by generic evidence support",
+      "threshold_change": "none initially"
+    },
+    {
+      "priority": 3,
+      "change": "Increase risk weighting only after collecting calibrated validation data",
+      "expected_effect": "Improve separation of warning and blocked cases",
+      "threshold_change": "calibrate, do not guess"
+    },
+    {
+      "priority": 4,
+      "change": "Generate multiple candidates for meaningful self-consistency",
+      "expected_effect": "Remove constant consistency_score=1.0 and expose disagreement"
+    },
+    {
+      "priority": 5,
+      "change": "Improve retrieval corpus/reranking for clinical action and contraindication evidence",
+      "expected_effect": "Reduce mismatched high-support evidence"
+    }
+  ],
+  "recommendation": "Do not change safe_threshold alone; implement safety vetoes and calibrate thresholds on an independently labelled balanced set."
+}

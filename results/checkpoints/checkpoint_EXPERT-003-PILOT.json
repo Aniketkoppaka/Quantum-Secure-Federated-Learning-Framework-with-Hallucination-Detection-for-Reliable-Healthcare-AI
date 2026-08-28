@@ -1,0 +1,7 @@
+{
+  "id": "EXPERT-003-PILOT",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "BLOCKED",
+  "confidence": 0.0,
+  "error": "name 'records' is not defined"
+}

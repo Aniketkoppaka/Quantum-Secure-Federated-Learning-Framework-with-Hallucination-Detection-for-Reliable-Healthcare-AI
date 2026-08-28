@@ -1,0 +1,71 @@
+{
+  "id": "WARN-010",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.6003,
+  "diagnostic": {
+    "case_id": "WARN-010",
+    "question": "What should a patient know about breastfeeding and a new prescription?",
+    "generated_answer": " Answer according to: A new prescription for a medication is often accompanied by a new bottle of milk. The new bottle may be the first time that a patient has had milk in their system, so they need to be aware of what it contains.\nA new prescription for a medication can also contain a new bottle of milk. This is because the new prescription may have been written after the patient took the previous prescription. It is important for patients to understand this fact before taking any new prescription",
+    "retrieved_evidence": [
+      {
+        "source_id": "PMID:32085732",
+        "title": "ACOG Clinical Practice Guideline: Medication Safety and Triage in Pregnancy and Lactation",
+        "category": "Obstetrics & Gynecology",
+        "relevance": 0.3669,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32085732/",
+        "summary": "Medication choices during pregnancy and breastfeeding require individualized clinical safety review against infant risk registries and pharmacokinetic excretion..."
+      },
+      {
+        "source_id": "PMID:29462276",
+        "title": "Clinical Practice Guidelines for Clostridium difficile Infection in Adults and Children: 2017 Update by IDSA/SHEA",
+        "category": "Infectious Disease",
+        "relevance": 0.1601,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/29462276/",
+        "summary": "First-line therapy for initial episode of non-severe or severe C. difficile infection is oral Fidaxomicin (200 mg BID for 10 days) or oral Vancomycin (125 mg 4 ..."
+      },
+      {
+        "source_id": "PMID:33863782",
+        "title": "Clinical Pharmacology and Geriatric Triage: Toxicity, Renal Adjustments, and Acute Decompensation",
+        "category": "Pharmacology & Geriatrics",
+        "relevance": 0.1173,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33863782/",
+        "summary": "In chronic kidney disease, poor renal filtration, and hepatic dysfunction, OTC analgesic and cold product dosing requires clinician review. Therapeutic lithium ..."
+      }
+    ],
+    "nli_results": [
+      {
+        "claim": "Answer according to: A new prescription for a medication is often accompanied by a new bottle of milk.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "The new bottle may be the first time that a patient has had milk in their system, so they need to be aware of what it contains.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "A new prescription for a medication can also contain a new bottle of milk.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "This is because the new prescription may have been written after the patient took the previous prescription.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "It is important for patients to understand this fact before taking any new prescription",
+        "label": "NEUTRAL",
+        "score": 0.49
+      }
+    ],
+    "support_score": 0.49,
+    "risk_score": 0.2005,
+    "consistency_score": 1.0,
+    "final_confidence": 0.6003,
+    "predicted_label": "CLINICAL_WARNING",
+    "ground_truth": "CLINICAL_WARNING",
+    "fallback_used": false
+  }
+}

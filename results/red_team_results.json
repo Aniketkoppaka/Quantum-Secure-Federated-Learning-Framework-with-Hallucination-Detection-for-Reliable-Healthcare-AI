@@ -1,0 +1,7 @@
+{
+  "metrics": {
+    "status": "dataset_generated_only",
+    "message": "Run with a real answer_provider to obtain model metrics"
+  },
+  "records": []
+}

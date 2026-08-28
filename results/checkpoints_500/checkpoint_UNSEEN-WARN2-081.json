@@ -1,0 +1,56 @@
+{
+  "id": "UNSEEN-WARN2-081",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.5676,
+  "diagnostic": {
+    "case_id": "UNSEEN-WARN2-081",
+    "question": "In a new patient situation (variant 5), hepatic dysfunction is known and several cold products are available; what should be checked?",
+    "generated_answer": " A: Liver function tests B: Blood glucose levels C: Urine output D: Blood pressure E: Temperature\nThe answer to the question \"In a new patient situation (variant 5), hepatic dysfunction is known, and several cold products are available; what should be checked?\" is:\n\nA: Liver function tests\n\nLiver function tests (LFTs) are typically used to assess liver health and function in patients with various conditions, including hepatitis. Since it's mentioned that",
+    "retrieved_evidence": [
+      {
+        "source_id": "PMID:33863782",
+        "title": "Clinical Pharmacology and Geriatric Triage: Toxicity, Renal Adjustments, and Acute Decompensation",
+        "category": "Pharmacology & Geriatrics",
+        "relevance": 0.3002,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33863782/",
+        "summary": "In chronic kidney disease, poor renal filtration, and hepatic dysfunction, OTC analgesic and cold product dosing requires clinician review. Therapeutic lithium ..."
+      },
+      {
+        "source_id": "PMID:33687352",
+        "title": "Gold Report: Global Strategy for Prevention, Diagnosis and Management of COPD",
+        "category": "Pulmonology",
+        "relevance": 0.1935,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33687352/",
+        "summary": "Spirometry showing post-bronchodilator FEV1/FVC < 0.70 confirms persistent airflow limitation. Initial pharmacological therapy: Group A: SABA or LABA; Group B: ..."
+      },
+      {
+        "source_id": "PMID:28734678",
+        "title": "Clinical Dietary Guidelines: Hydration, Nutrition, and Gastrointestinal Health",
+        "category": "Preventive Health & Nutrition",
+        "relevance": 0.2561,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28734678/",
+        "summary": "Healthy daily hydration supports renal function, cardiovascular hemodynamic stability, and electrolyte balance. Drinking adequate water throughout the day, cons..."
+      }
+    ],
+    "nli_results": [
+      {
+        "claim": "A: Liver function tests B: Blood glucose levels C: Urine output D: Blood pressure E: Temperature\nThe answer to the question \"In a new patient situation (variant 5), hepatic dysfunction is known, and several cold products are available; what should be checked?\" is:\n\nA: Liver function tests\n\nLiver function tests (LFTs) are typically used to assess liver health and function in patients with various conditions, including hepatitis.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "Since it's mentioned that",
+        "label": "NEUTRAL",
+        "score": 0.49
+      }
+    ],
+    "support_score": 0.49,
+    "risk_score": 0.2145,
+    "consistency_score": 1.0,
+    "final_confidence": 0.5676,
+    "predicted_label": "CLINICAL_WARNING",
+    "ground_truth": "CLINICAL_WARNING",
+    "fallback_used": false
+  }
+}

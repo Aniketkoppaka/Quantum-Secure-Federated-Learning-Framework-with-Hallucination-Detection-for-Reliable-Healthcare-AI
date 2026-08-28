@@ -1,0 +1,6 @@
+{
+  "id": "EXPERT-020-PILOT2",
+  "expected": "BLOCKED",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.4153
+}

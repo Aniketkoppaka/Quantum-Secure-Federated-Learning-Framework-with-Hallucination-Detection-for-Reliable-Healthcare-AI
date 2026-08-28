@@ -1,0 +1,51 @@
+{
+  "id": "AFTERFIX-056",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.5132,
+  "diagnostic": {
+    "case_id": "AFTERFIX-056",
+    "question": "In a new patient situation (variant 1), a new prescription is being considered during breastfeeding; what should be checked?",
+    "generated_answer": " A) The baby's weight B) The baby's blood type C) The baby's gender D) The baby's age\nThe answer is \"D\"",
+    "retrieved_evidence": [
+      {
+        "source_id": "PMID:28982544",
+        "title": "AHA/ACC Hypertension Clinical Practice Guidelines",
+        "category": "Cardiology / Hypertension",
+        "relevance": 0.1891,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28982544/",
+        "summary": "Stage 1 hypertension is defined as SBP 130-139 mmHg or DBP 80-89 mmHg. Stage 2 hypertension is SBP >= 140 mmHg or DBP >= 90 mmHg. First-line agents for non-Blac..."
+      },
+      {
+        "source_id": "PMID:35871239",
+        "title": "ADA Standards of Medical Care in Diabetes - 2024",
+        "category": "Endocrinology",
+        "relevance": 0.1955,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35871239/",
+        "summary": "Metformin remains the foundational first-line pharmacological agent for Type 2 Diabetes mellitus unless contraindicated (e.g., eGFR < 30 mL/min/1.73m2). For pat..."
+      },
+      {
+        "source_id": "PMID:33245481",
+        "title": "AHA/ACC 2023 Guidelines for the Management of Heart Failure",
+        "category": "Cardiology",
+        "relevance": 0.1566,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33245481/",
+        "summary": "First-line therapy for heart failure with reduced ejection fraction (HFrEF) includes quadruple therapy: SGLT2 inhibitors (e.g. Empagliflozin, Dapagliflozin), AR..."
+      }
+    ],
+    "nli_results": [
+      {
+        "claim": "A) The baby's weight B) The baby's blood type C) The baby's gender D) The baby's age\nThe answer is \"D\"",
+        "label": "NEUTRAL",
+        "score": 0.49
+      }
+    ],
+    "support_score": 0.49,
+    "risk_score": 0.2378,
+    "consistency_score": 1.0,
+    "final_confidence": 0.5132,
+    "predicted_label": "CLINICAL_WARNING",
+    "ground_truth": "CLINICAL_WARNING",
+    "fallback_used": false
+  }
+}

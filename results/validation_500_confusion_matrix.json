@@ -1,0 +1,24 @@
+{
+  "classes": [
+    "VERIFIED_SAFE",
+    "CLINICAL_WARNING",
+    "BLOCKED"
+  ],
+  "matrix": [
+    [
+      33,
+      85,
+      7
+    ],
+    [
+      1,
+      108,
+      32
+    ],
+    [
+      4,
+      124,
+      106
+    ]
+  ]
+}

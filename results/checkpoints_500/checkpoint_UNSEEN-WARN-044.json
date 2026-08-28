@@ -1,0 +1,71 @@
+{
+  "id": "UNSEEN-WARN-044",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.6924,
+  "diagnostic": {
+    "case_id": "UNSEEN-WARN-044",
+    "question": "In a new patient situation (variant 7), poor filtration is present and an OTC product is being considered; is review needed?",
+    "generated_answer": " Yes, review is necessary.\nThe patient has been prescribed an OTC medication for a condition that requires proper filtration to ensure it reaches the bloodstream effectively. Poor filtration can lead to issues such as reduced drug absorption or potential side effects if the medication does not reach its intended target site in the body. Therefore, it's crucial to review the patient's current medications and any other relevant health conditions before considering an OTC product like this one. This step ensures that the chosen medication aligns",
+    "retrieved_evidence": [
+      {
+        "source_id": "PMID:33863782",
+        "title": "Clinical Pharmacology and Geriatric Triage: Toxicity, Renal Adjustments, and Acute Decompensation",
+        "category": "Pharmacology & Geriatrics",
+        "relevance": 0.374,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33863782/",
+        "summary": "In chronic kidney disease, poor renal filtration, and hepatic dysfunction, OTC analgesic and cold product dosing requires clinician review. Therapeutic lithium ..."
+      },
+      {
+        "source_id": "PMID:30642456",
+        "title": "2019 AHA/ACC/HRS Focused Update of the Guideline for Management of Atrial Fibrillation",
+        "category": "Cardiology",
+        "relevance": 0.2404,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30642456/",
+        "summary": "Direct oral anticoagulants (DOACs: Apixaban, Rivaroxaban, Dabigatran) are recommended first-line over warfarin for stroke prevention in nonvalvular AF with CHA2..."
+      },
+      {
+        "source_id": "PMID:32085732",
+        "title": "ACOG Clinical Practice Guideline: Medication Safety and Triage in Pregnancy and Lactation",
+        "category": "Obstetrics & Gynecology",
+        "relevance": 0.2829,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32085732/",
+        "summary": "Medication choices during pregnancy and breastfeeding require individualized clinical safety review against infant risk registries and pharmacokinetic excretion..."
+      }
+    ],
+    "nli_results": [
+      {
+        "claim": "Yes, review is necessary.",
+        "label": "ENTAILED",
+        "score": 0.989
+      },
+      {
+        "claim": "The patient has been prescribed an OTC medication for a condition that requires proper filtration to ensure it reaches the bloodstream effectively.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "Poor filtration can lead to issues such as reduced drug absorption or potential side effects if the medication does not reach its intended target site in the body.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "Therefore, it's crucial to review the patient's current medications and any other relevant health conditions before considering an OTC product like this one.",
+        "label": "ENTAILED",
+        "score": 0.974
+      },
+      {
+        "claim": "This step ensures that the chosen medication aligns",
+        "label": "NEUTRAL",
+        "score": 0.49
+      }
+    ],
+    "support_score": 0.687,
+    "risk_score": 0.1497,
+    "consistency_score": 1.0,
+    "final_confidence": 0.6924,
+    "predicted_label": "CLINICAL_WARNING",
+    "ground_truth": "CLINICAL_WARNING",
+    "fallback_used": false
+  }
+}

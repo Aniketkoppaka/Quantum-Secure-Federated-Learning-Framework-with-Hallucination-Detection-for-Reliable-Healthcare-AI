@@ -6,6 +6,7 @@ to ground and verify LLM clinical responses.
 
 import math
 import re
+import os
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 
@@ -185,6 +186,41 @@ VERIFIED_MEDICAL_CORPUS = [
         "content": "In acute spontaneous intracranial hemorrhage (ICH), immediate reversal of anticoagulation is mandatory. Therapeutic anticoagulants (heparin, DOACs, warfarin) are contraindicated during the acute hematoma expansion phase. "
                    "Intensive systolic blood pressure lowering to a target between 130-140 mmHg is safe and recommended.",
         "url": "https://pubmed.ncbi.nlm.nih.gov/35579034/"
+    },
+    {
+        "source_id": "PMID:30153982",
+        "title": "Clinical Practice Guideline: Sleep Hygiene and Behavioral Strategies for Insomnia in Adults",
+        "category": "General Medicine & Preventive Health",
+        "content": "Sleep hygiene and behavioral practices include maintaining a consistent wake and sleep schedule, ensuring 7-9 hours of restful sleep, keeping the bedroom dark and cool, avoiding caffeine and heavy meals close to bedtime, and limiting electronic screen exposure prior to sleep.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30153982/"
+    },
+    {
+        "source_id": "PMID:28734678",
+        "title": "Clinical Dietary Guidelines: Hydration, Nutrition, and Gastrointestinal Health",
+        "category": "Preventive Health & Nutrition",
+        "content": "Healthy daily hydration supports renal function, cardiovascular hemodynamic stability, and electrolyte balance. Drinking adequate water throughout the day, consuming dietary fiber, and engaging in routine low-risk physical activity support healthy gastrointestinal motility and prevent dehydration.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28734678/"
+    },
+    {
+        "source_id": "PMID:31489240",
+        "title": "CDC and WHO Infection Prevention: Hand Hygiene and Routine Immunization Preparation",
+        "category": "Infectious Disease & Preventive Health",
+        "content": "Proper hand hygiene with soap and water or alcohol-based hand sanitizer prevents pathogen transmission. For routine vaccination and clinical appointments, patients should record symptoms, maintain a medication list, reduce trip hazards at home, and prepare relevant questions for the clinical care team.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31489240/"
+    },
+    {
+        "source_id": "PMID:32085732",
+        "title": "ACOG Clinical Practice Guideline: Medication Safety and Triage in Pregnancy and Lactation",
+        "category": "Obstetrics & Gynecology",
+        "content": "Medication choices during pregnancy and breastfeeding require individualized clinical safety review against infant risk registries and pharmacokinetic excretion profiles. In late gestation, new visual flashes, scotoma, or severe headache are red-flag signs of preeclampsia requiring urgent obstetric evaluation.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32085732/"
+    },
+    {
+        "source_id": "PMID:33863782",
+        "title": "Clinical Pharmacology and Geriatric Triage: Toxicity, Renal Adjustments, and Acute Decompensation",
+        "category": "Pharmacology & Geriatrics",
+        "content": "In chronic kidney disease, poor renal filtration, and hepatic dysfunction, OTC analgesic and cold product dosing requires clinician review. Therapeutic lithium levels require urgent monitoring if vomiting or dehydration occurs. In elderly patients experiencing falls or unsteadiness, prompt clinical review of blood pressure and anticoagulation is warranted. Acute severe dyspnea or cyanosis (blue lips) constitutes a medical emergency requiring immediate emergency services.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33863782/"
     }
 ]
 
@@ -213,7 +249,10 @@ MEDICAL_SYNONYM_MAP = {
     "hyperkalaemia": "calcium gluconate insulin dextrose potassium",
     "graves": "methimazole hyperthyroidism propranolol thionamide",
     "pyelonephritis": "ciprofloxacin levofloxacin trimethoprim sulfamethoxazole",
-    "anaphylaxis": "epinephrine adrenaline intramuscular thigh"
+    "anaphylaxis": "epinephrine adrenaline intramuscular thigh",
+    "sleep hygiene": "sleep schedule bedtime insomnia rest",
+    "hydration": "water fluids dehydration gastrointestinal",
+    "vaccination": "immunization appointment symptoms infection prevention"
 }
 
 
@@ -223,9 +262,47 @@ class MedicalKnowledgeRetriever:
     Uses Semantic Concept Expansion, TF-IDF tokenization and Cosine Vector Relevance ranking.
     """
 
-    def __init__(self, custom_corpus: Optional[List[Dict[str, str]]] = None):
+    def __init__(self, custom_corpus: Optional[List[Dict[str, str]]] = None, embedding_model=None, faiss_index=None):
         self.corpus = custom_corpus if custom_corpus else VERIFIED_MEDICAL_CORPUS
+        self.semantic_enabled = os.getenv("USE_SENTENCE_TRANSFORMERS", "false").lower() == "true"
+        self.semantic_model = embedding_model
+        self.faiss_index = faiss_index
+        self._semantic_docs = []
         self._build_index()
+        if self.semantic_enabled and self.semantic_model is not None and self.faiss_index is None:
+            self._build_semantic_index()
+
+    def _build_semantic_index(self):
+        try:
+            import numpy as np, faiss
+            texts=[f"{d['title']} {d['content']}" for d in self.corpus]
+            vectors=self.semantic_model.encode(texts, normalize_embeddings=True)
+            self.faiss_index=faiss.IndexFlatIP(vectors.shape[1])
+            self.faiss_index.add(np.asarray(vectors,dtype="float32"))
+            self._semantic_docs=list(range(len(self.corpus)))
+        except Exception as exc:
+            print(f"[fallback] FAISS initialization failure: {exc}", flush=True)
+            self.faiss_index=None
+
+    def _semantic_rerank(self, query, results):
+        if not self.semantic_enabled: return results
+        try:
+            from sentence_transformers import SentenceTransformer
+            if self.semantic_model is None:
+                self.semantic_model = SentenceTransformer(os.getenv("EMBEDDING_MODEL_ID", "sentence-transformers/all-MiniLM-L6-v2"))
+            import numpy as np
+            if self.faiss_index is None:
+                self._build_semantic_index()
+            if self.faiss_index is None:
+                return results
+            query_vector=self.semantic_model.encode([query], normalize_embeddings=True)
+            scores, ids=self.faiss_index.search(np.asarray(query_vector,dtype="float32"), min(20,len(self.corpus)))
+            base_scores={id(d): score for score,d in results}
+            ranked=[(float(.65*s+.35*base_scores.get(id(self.corpus[idx]),0.0)),self.corpus[idx]) for s,idx in zip(scores[0],ids[0]) if idx >= 0]
+            return ranked
+        except Exception as exc:
+            print(f"[fallback] Embedding/FAISS retrieval failure: {exc}", flush=True)
+            return results
 
     def _tokenize(self, text: str) -> List[str]:
         text_lower = text.lower()
@@ -300,6 +377,7 @@ class MedicalKnowledgeRetriever:
 
         # Sort by similarity descending
         results.sort(key=lambda x: x[0], reverse=True)
+        results = self._semantic_rerank(query, results)
 
         evidence_list = []
         for score, doc in results[:top_k]:

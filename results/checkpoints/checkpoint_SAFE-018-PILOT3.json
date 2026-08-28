@@ -1,0 +1,6 @@
+{
+  "id": "SAFE-018-PILOT3",
+  "expected": "VERIFIED_SAFE",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.6911
+}

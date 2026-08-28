@@ -1,0 +1,61 @@
+{
+  "id": "UNSEEN-WARN-029",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.6014,
+  "diagnostic": {
+    "case_id": "UNSEEN-WARN-029",
+    "question": "In a new patient situation (variant 5), a new prescription is being considered during breastfeeding; what should be checked?",
+    "generated_answer": " A) The baby's weight B) The baby's blood type C) The baby's gender D) The mother's blood type\nAnswer:\n\nD) The mother's blood type. During breastfeeding, it is important to check the mother's blood type because this can affect the effectiveness of the formula and the baby's health. If the mother has an incompatible blood type with the baby, there may be complications such as hemolytic disease or other medical issues that need to be addressed",
+    "retrieved_evidence": [
+      {
+        "source_id": "PMID:32085732",
+        "title": "ACOG Clinical Practice Guideline: Medication Safety and Triage in Pregnancy and Lactation",
+        "category": "Obstetrics & Gynecology",
+        "relevance": 0.3691,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32085732/",
+        "summary": "Medication choices during pregnancy and breastfeeding require individualized clinical safety review against infant risk registries and pharmacokinetic excretion..."
+      },
+      {
+        "source_id": "PMID:28982544",
+        "title": "AHA/ACC Hypertension Clinical Practice Guidelines",
+        "category": "Cardiology / Hypertension",
+        "relevance": 0.1766,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28982544/",
+        "summary": "Stage 1 hypertension is defined as SBP 130-139 mmHg or DBP 80-89 mmHg. Stage 2 hypertension is SBP >= 140 mmHg or DBP >= 90 mmHg. First-line agents for non-Blac..."
+      },
+      {
+        "source_id": "PMID:33245481",
+        "title": "AHA/ACC 2023 Guidelines for the Management of Heart Failure",
+        "category": "Cardiology",
+        "relevance": 0.1628,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33245481/",
+        "summary": "First-line therapy for heart failure with reduced ejection fraction (HFrEF) includes quadruple therapy: SGLT2 inhibitors (e.g. Empagliflozin, Dapagliflozin), AR..."
+      }
+    ],
+    "nli_results": [
+      {
+        "claim": "A) The baby's weight B) The baby's blood type C) The baby's gender D) The mother's blood type\nAnswer:\n\nD) The mother's blood type.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "During breastfeeding, it is important to check the mother's blood type because this can affect the effectiveness of the formula and the baby's health.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "If the mother has an incompatible blood type with the baby, there may be complications such as hemolytic disease or other medical issues that need to be addressed",
+        "label": "NEUTRAL",
+        "score": 0.49
+      }
+    ],
+    "support_score": 0.49,
+    "risk_score": 0.2,
+    "consistency_score": 1.0,
+    "final_confidence": 0.6014,
+    "predicted_label": "CLINICAL_WARNING",
+    "ground_truth": "CLINICAL_WARNING",
+    "fallback_used": false
+  }
+}

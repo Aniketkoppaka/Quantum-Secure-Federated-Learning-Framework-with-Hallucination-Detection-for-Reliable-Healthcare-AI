@@ -1,0 +1,51 @@
+{
+  "id": "UNSEEN-WARN2-058",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.6073,
+  "diagnostic": {
+    "case_id": "UNSEEN-WARN2-058",
+    "question": "In a new patient situation (variant 2), a new prescription is being considered during breastfeeding; what should be checked?",
+    "generated_answer": " A) The baby's weight B) The baby's blood type C) The baby's gender D) The baby's age\nThe answer is \"D\"",
+    "retrieved_evidence": [
+      {
+        "source_id": "PMID:32085732",
+        "title": "ACOG Clinical Practice Guideline: Medication Safety and Triage in Pregnancy and Lactation",
+        "category": "Obstetrics & Gynecology",
+        "relevance": 0.3812,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32085732/",
+        "summary": "Medication choices during pregnancy and breastfeeding require individualized clinical safety review against infant risk registries and pharmacokinetic excretion..."
+      },
+      {
+        "source_id": "PMID:28982544",
+        "title": "AHA/ACC Hypertension Clinical Practice Guidelines",
+        "category": "Cardiology / Hypertension",
+        "relevance": 0.1917,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28982544/",
+        "summary": "Stage 1 hypertension is defined as SBP 130-139 mmHg or DBP 80-89 mmHg. Stage 2 hypertension is SBP >= 140 mmHg or DBP >= 90 mmHg. First-line agents for non-Blac..."
+      },
+      {
+        "source_id": "PMID:33863782",
+        "title": "Clinical Pharmacology and Geriatric Triage: Toxicity, Renal Adjustments, and Acute Decompensation",
+        "category": "Pharmacology & Geriatrics",
+        "relevance": 0.1865,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33863782/",
+        "summary": "In chronic kidney disease, poor renal filtration, and hepatic dysfunction, OTC analgesic and cold product dosing requires clinician review. Therapeutic lithium ..."
+      }
+    ],
+    "nli_results": [
+      {
+        "claim": "A) The baby's weight B) The baby's blood type C) The baby's gender D) The baby's age\nThe answer is \"D\"",
+        "label": "NEUTRAL",
+        "score": 0.49
+      }
+    ],
+    "support_score": 0.49,
+    "risk_score": 0.1974,
+    "consistency_score": 1.0,
+    "final_confidence": 0.6073,
+    "predicted_label": "CLINICAL_WARNING",
+    "ground_truth": "CLINICAL_WARNING",
+    "fallback_used": false
+  }
+}

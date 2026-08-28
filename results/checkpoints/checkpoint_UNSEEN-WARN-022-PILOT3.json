@@ -1,0 +1,6 @@
+{
+  "id": "UNSEEN-WARN-022-PILOT3",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "BLOCKED",
+  "confidence": 0.15
+}

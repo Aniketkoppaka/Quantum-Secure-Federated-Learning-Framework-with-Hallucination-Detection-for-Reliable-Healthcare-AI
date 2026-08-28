@@ -1,0 +1,7 @@
+{
+  "id": "EXPERT-004-PILOT",
+  "expected": "BLOCKED",
+  "predicted": "BLOCKED",
+  "confidence": 0.0,
+  "error": "name 'records' is not defined"
+}

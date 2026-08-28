@@ -1,0 +1,7 @@
+{
+  "class_order": ["VERIFIED_SAFE", "CLINICAL_WARNING", "BLOCKED"],
+  "matrix": [[0, 24, 6], [0, 30, 0], [0, 19, 11]],
+  "prediction_distribution": {"VERIFIED_SAFE": 0, "CLINICAL_WARNING": 73, "BLOCKED": 17},
+  "support": {"VERIFIED_SAFE": 30, "CLINICAL_WARNING": 30, "BLOCKED": 30},
+  "source": "balanced_90_after_fix_results.json"
+}

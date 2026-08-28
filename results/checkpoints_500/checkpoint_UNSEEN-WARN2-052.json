@@ -1,0 +1,76 @@
+{
+  "id": "UNSEEN-WARN2-052",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.6575,
+  "diagnostic": {
+    "case_id": "UNSEEN-WARN2-052",
+    "question": "In a new patient situation (variant 1), poor filtration is present and an OTC product is being considered; is review needed?",
+    "generated_answer": " Yes, review is required.\nA variant of the question asks if it's necessary to review when considering an OTC product for a patient with poor filtration. The answer is yes, because:\n\n1. Poor filtration can affect drug efficacy and safety in patients.\n\n2. An OTC product may not be appropriate or effective for someone with poor filtration due to potential side effects or interactions.\n\n3. It's important to consider alternative treatments that are safe and effective for this condition.\n\n4.",
+    "retrieved_evidence": [
+      {
+        "source_id": "PMID:33863782",
+        "title": "Clinical Pharmacology and Geriatric Triage: Toxicity, Renal Adjustments, and Acute Decompensation",
+        "category": "Pharmacology & Geriatrics",
+        "relevance": 0.3294,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33863782/",
+        "summary": "In chronic kidney disease, poor renal filtration, and hepatic dysfunction, OTC analgesic and cold product dosing requires clinician review. Therapeutic lithium ..."
+      },
+      {
+        "source_id": "PMID:32085732",
+        "title": "ACOG Clinical Practice Guideline: Medication Safety and Triage in Pregnancy and Lactation",
+        "category": "Obstetrics & Gynecology",
+        "relevance": 0.2402,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32085732/",
+        "summary": "Medication choices during pregnancy and breastfeeding require individualized clinical safety review against infant risk registries and pharmacokinetic excretion..."
+      },
+      {
+        "source_id": "PMID:30642456",
+        "title": "2019 AHA/ACC/HRS Focused Update of the Guideline for Management of Atrial Fibrillation",
+        "category": "Cardiology",
+        "relevance": 0.1743,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30642456/",
+        "summary": "Direct oral anticoagulants (DOACs: Apixaban, Rivaroxaban, Dabigatran) are recommended first-line over warfarin for stroke prevention in nonvalvular AF with CHA2..."
+      }
+    ],
+    "nli_results": [
+      {
+        "claim": "Yes, review is required.",
+        "label": "ENTAILED",
+        "score": 0.991
+      },
+      {
+        "claim": "A variant of the question asks if it's necessary to review when considering an OTC product for a patient with poor filtration.",
+        "label": "ENTAILED",
+        "score": 0.996
+      },
+      {
+        "claim": "The answer is yes, because:\n\n1.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "Poor filtration can affect drug efficacy and safety in patients.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "An OTC product may not be appropriate or effective for someone with poor filtration due to potential side effects or interactions.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "It's important to consider alternative treatments that are safe and effective for this condition.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      }
+    ],
+    "support_score": 0.658,
+    "risk_score": 0.1663,
+    "consistency_score": 1.0,
+    "final_confidence": 0.6575,
+    "predicted_label": "CLINICAL_WARNING",
+    "ground_truth": "CLINICAL_WARNING",
+    "fallback_used": false
+  }
+}

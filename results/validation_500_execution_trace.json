@@ -1,0 +1,149 @@
+{
+  "events": [
+    {
+      "timestamp": "2026-08-29T00:55:43.991299",
+      "step": "dataset loading",
+      "status": "ok"
+    },
+    {
+      "timestamp": "2026-08-29T00:55:43.992217",
+      "step": "dataset ready",
+      "status": "ok",
+      "known": 100,
+      "unseen": 350,
+      "expert": 50
+    },
+    {
+      "timestamp": "2026-08-29T00:55:49.058314",
+      "step": "Hugging Face model loading start",
+      "status": "ok",
+      "model": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "timestamp": "2026-08-29T00:55:51.143852",
+      "step": "Hugging Face model loading end",
+      "status": "ok",
+      "device": "cuda"
+    },
+    {
+      "timestamp": "2026-08-29T00:55:53.982852",
+      "step": "Sentence Transformer loading start",
+      "status": "ok"
+    },
+    {
+      "timestamp": "2026-08-29T00:55:58.669495",
+      "step": "Sentence Transformer loading end",
+      "status": "ok",
+      "dimensions": 384
+    },
+    {
+      "timestamp": "2026-08-29T00:55:58.669495",
+      "step": "NLI model loading start",
+      "status": "ok"
+    },
+    {
+      "timestamp": "2026-08-29T00:55:59.619198",
+      "step": "NLI model loading end",
+      "status": "ok"
+    },
+    {
+      "timestamp": "2026-08-29T00:55:59.845206",
+      "step": "KNOWN start",
+      "status": "ok",
+      "count": 100
+    },
+    {
+      "timestamp": "2026-08-29T00:56:00.424871",
+      "step": "KNOWN end",
+      "status": "ok",
+      "metrics": {
+        "accuracy": 0.5,
+        "precision": [
+          1.0,
+          0.3,
+          0.5714285714285714
+        ],
+        "recall": [
+          0.6,
+          0.6,
+          0.4
+        ],
+        "macro_f1": 0.5401960784313725,
+        "warning_recall": 0.6,
+        "hallucination_catch_rate": 0.4,
+        "false_safe_rate": 0.0,
+        "false_block_rate": 0.2,
+        "adversarial_robustness_score": null,
+        "unseen_generalization_score": null
+      }
+    },
+    {
+      "timestamp": "2026-08-29T00:56:00.424871",
+      "step": "UNSEEN start",
+      "status": "ok",
+      "count": 350
+    },
+    {
+      "timestamp": "2026-08-29T00:56:02.385694",
+      "step": "UNSEEN end",
+      "status": "ok",
+      "metrics": {
+        "accuracy": 0.5,
+        "precision": [
+          1.0,
+          0.3459915611814346,
+          0.7894736842105263
+        ],
+        "recall": [
+          0.18,
+          0.82,
+          0.5
+        ],
+        "macro_f1": 0.4679921759982975,
+        "warning_recall": 0.82,
+        "hallucination_catch_rate": 0.5,
+        "false_safe_rate": 0.0,
+        "false_block_rate": 0.02,
+        "adversarial_robustness_score": null,
+        "unseen_generalization_score": null
+      }
+    },
+    {
+      "timestamp": "2026-08-29T00:56:02.385694",
+      "step": "EXPERT start",
+      "status": "ok",
+      "count": 50
+    },
+    {
+      "timestamp": "2026-08-29T00:56:02.656906",
+      "step": "EXPERT end",
+      "status": "ok",
+      "metrics": {
+        "accuracy": 0.44,
+        "precision": [
+          0.0,
+          0.36666666666666664,
+          0.7333333333333333
+        ],
+        "recall": [
+          0.0,
+          0.6875,
+          0.3235294117647059
+        ],
+        "macro_f1": 0.3090801538006507,
+        "warning_recall": 0.6875,
+        "hallucination_catch_rate": 0.3235294117647059,
+        "false_safe_rate": 0.11764705882352941,
+        "false_block_rate": 0.0,
+        "adversarial_robustness_score": null,
+        "unseen_generalization_score": null
+      }
+    },
+    {
+      "timestamp": "2026-08-29T00:56:02.695575",
+      "step": "validation 500 complete",
+      "status": "ok"
+    }
+  ],
+  "last_completed_step": "validation 500 complete"
+}

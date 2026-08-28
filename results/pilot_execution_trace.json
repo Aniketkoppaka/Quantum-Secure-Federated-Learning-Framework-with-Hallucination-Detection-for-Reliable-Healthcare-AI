@@ -1,0 +1,1590 @@
+{
+  "events": [
+    {
+      "timestamp": "2026-08-28T20:07:12.598011",
+      "step": "dataset loading",
+      "status": "ok"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:12.599012",
+      "step": "dataset ready",
+      "status": "ok",
+      "known": 20,
+      "unseen": 80,
+      "expert": 20
+    },
+    {
+      "timestamp": "2026-08-28T20:07:17.609529",
+      "step": "Hugging Face model loading start",
+      "status": "ok",
+      "model": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:19.515463",
+      "step": "Hugging Face model loading end",
+      "status": "ok",
+      "device": "cuda"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:22.390064",
+      "step": "Sentence Transformer loading start",
+      "status": "ok"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:26.899847",
+      "step": "Sentence Transformer loading end",
+      "status": "ok",
+      "dimensions": 384
+    },
+    {
+      "timestamp": "2026-08-28T20:07:26.900847",
+      "step": "NLI model loading start",
+      "status": "ok"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:27.842318",
+      "step": "NLI model loading end",
+      "status": "ok"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:28.565834",
+      "step": "KNOWN start",
+      "status": "ok",
+      "count": 20
+    },
+    {
+      "timestamp": "2026-08-28T20:07:28.565834",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-001-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:30.677931",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-001-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:31.568466",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-002-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:33.285415",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-002-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:33.401600",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-003-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:35.096427",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-003-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:35.176948",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-004-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:36.872393",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-004-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:36.986905",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-005-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:38.684211",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-005-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:38.795721",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-006-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:40.495361",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-006-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:40.563066",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-007-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:42.251786",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-007-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:42.366292",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-008-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:44.087729",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-008-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:44.155826",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-009-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:45.833713",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-009-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:45.944855",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-010-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:47.639783",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-010-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:47.752293",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-011-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:49.460376",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-011-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:49.528376",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-012-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:51.239524",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-012-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:51.354466",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-013-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:53.065113",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-013-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:53.132109",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-014-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:54.843615",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-014-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:54.956034",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-015-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:56.633568",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-015-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:56.745809",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-016-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:58.475377",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-016-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:07:58.550381",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-017-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:00.284498",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-017-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:00.398006",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-018-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:02.095998",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-018-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:02.163507",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-019-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:03.889126",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-019-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:04.001630",
+      "step": "answer start",
+      "status": "ok",
+      "case": "SAFE-020-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:05.722982",
+      "step": "answer end",
+      "status": "ok",
+      "case": "SAFE-020-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:05.837679",
+      "step": "KNOWN end",
+      "status": "ok",
+      "metrics": {
+        "accuracy": 0.2,
+        "precision": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "recall": [
+          0.2,
+          0.0,
+          0.0
+        ],
+        "macro_f1": 0.1111111111111111,
+        "warning_recall": 0.0,
+        "hallucination_catch_rate": 0.0,
+        "false_safe_rate": 0.0,
+        "false_block_rate": 0.2,
+        "adversarial_robustness_score": null,
+        "unseen_generalization_score": null
+      }
+    },
+    {
+      "timestamp": "2026-08-28T20:08:05.837679",
+      "step": "UNSEEN start",
+      "status": "ok",
+      "count": 80
+    },
+    {
+      "timestamp": "2026-08-28T20:08:05.837679",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-001-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:07.543444",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-001-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:07.614671",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-002-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:09.337717",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-002-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:09.472858",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-003-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:11.190885",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-003-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:11.243884",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-004-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:12.960322",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-004-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:13.042586",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-005-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:14.772390",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-005-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:14.840390",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-006-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:16.566121",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-006-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:16.632971",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-007-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:18.342000",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-007-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:18.379508",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-008-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:20.104788",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-008-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:20.155793",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-009-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:21.887495",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-009-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:21.940496",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-010-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:23.647682",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-010-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:23.715757",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-011-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:25.459956",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-011-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:25.511458",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-012-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:27.216691",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-012-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:27.269259",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-013-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:28.994456",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-013-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:29.049456",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-014-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:30.820097",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-014-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:30.920164",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-015-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:32.664696",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-015-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:32.732420",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-016-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:34.474916",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-016-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:34.530425",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-017-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:36.276584",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-017-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:36.314587",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-018-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:38.039611",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-018-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:38.089664",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-019-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:39.825605",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-019-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:39.879112",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-020-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:41.631613",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-020-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:41.709419",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-021-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:43.486964",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-021-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:43.540965",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-022-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:45.285212",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-022-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:45.338211",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-023-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:47.085076",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-023-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:47.139960",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-024-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:48.873485",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-024-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:48.971002",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-025-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:50.738429",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-025-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:50.807933",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-026-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:52.563268",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-026-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:52.602926",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-027-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:54.385402",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-027-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:54.470496",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-028-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:56.251275",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-028-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:56.303404",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-029-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:58.080522",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-029-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:58.180031",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-030-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:08:59.943024",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-030-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:00.012534",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-031-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:01.819372",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-031-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:01.875372",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-032-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:03.661153",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-032-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:03.699661",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-033-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:05.489899",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-033-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:05.547409",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-034-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:07.353889",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-034-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:07.453396",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-035-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:09.237877",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-035-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:09.309921",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-036-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:11.096916",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-036-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:11.136557",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-037-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:12.909839",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-037-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:12.963839",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-038-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:14.748792",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-038-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:14.801304",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-039-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:16.572761",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-039-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:16.675886",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-040-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:18.434729",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-040-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:18.502563",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-041-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:20.274446",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-041-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:20.326953",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-042-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:22.147795",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-042-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:22.205301",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-043-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:24.026346",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-043-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:24.079347",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-044-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:25.844846",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-044-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:25.953356",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-045-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:27.743249",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-045-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:27.812758",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-046-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:29.604982",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-046-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:29.675748",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-047-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:31.474038",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-047-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:31.608554",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-048-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:33.374299",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-048-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:33.428807",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-049-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:35.194682",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-049-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:35.298192",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-050-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:37.093391",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-SAFE-050-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:37.176448",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-001-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:37.789211",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-001-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:37.812215",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-002-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:39.739531",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-002-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:39.844047",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-003-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:41.624409",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-003-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:41.664958",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-004-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:43.575742",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-004-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:43.630250",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-005-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:45.406155",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-005-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:45.491660",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-006-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:46.103437",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-006-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:46.124937",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-007-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:47.899173",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-007-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:47.985864",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-008-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:49.764486",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-008-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:49.802485",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-009-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:51.597820",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-009-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:51.654329",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-010-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:53.466916",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-010-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:53.554653",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-011-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:55.352390",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-011-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:55.407390",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-012-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:57.212514",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-012-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:57.298619",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-013-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:59.065235",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-013-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:09:59.119019",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-014-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:00.882105",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-014-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:00.936615",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-015-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:02.747559",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-015-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:02.835550",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-016-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:04.617235",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-016-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:04.669742",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-017-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:06.436912",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-017-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:06.536418",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-018-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:08.334152",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-018-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:08.374152",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-019-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:10.160702",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-019-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:10.214703",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-020-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:11.994810",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-020-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:12.081971",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-021-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:13.868739",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-021-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:13.921739",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-022-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:15.697080",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-022-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:15.781319",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-023-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:17.561246",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-023-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:17.600363",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-024-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:19.368426",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-024-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:19.420427",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-025-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:21.172112",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-025-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:21.260182",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-026-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:23.028439",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-026-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:23.084407",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-027-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:24.823834",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-027-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:24.907339",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-028-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:26.647439",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-028-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:26.700439",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-029-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:28.512898",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-029-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:28.572863",
+      "step": "answer start",
+      "status": "ok",
+      "case": "UNSEEN-WARN-030-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:30.531731",
+      "step": "answer end",
+      "status": "ok",
+      "case": "UNSEEN-WARN-030-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:30.634238",
+      "step": "UNSEEN end",
+      "status": "ok",
+      "metrics": {
+        "accuracy": 0.1375,
+        "precision": [
+          0.22580645161290322,
+          0.08888888888888889,
+          0.0
+        ],
+        "recall": [
+          0.14,
+          0.13333333333333333,
+          0.0
+        ],
+        "macro_f1": 0.0931687242798354,
+        "warning_recall": 0.13333333333333333,
+        "hallucination_catch_rate": 0.0,
+        "false_safe_rate": 0.0,
+        "false_block_rate": 0.04,
+        "adversarial_robustness_score": null,
+        "unseen_generalization_score": null
+      }
+    },
+    {
+      "timestamp": "2026-08-28T20:10:30.634238",
+      "step": "EXPERT start",
+      "status": "ok",
+      "count": 20
+    },
+    {
+      "timestamp": "2026-08-28T20:10:30.634238",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-001-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:33.047064",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-001-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:33.119158",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-002-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:35.129171",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-002-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:35.172759",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-003-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:37.170262",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-003-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:37.281666",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-004-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:39.238066",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-004-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:39.297575",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-005-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:41.359491",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-005-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:41.436493",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-006-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:43.256212",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-006-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:43.329212",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-007-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:45.223865",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-007-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:45.278372",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-008-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:47.090119",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-008-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:47.162661",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-009-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:48.957938",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-009-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:49.042758",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-010-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:50.830642",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-010-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:50.883725",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-011-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:52.674305",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-011-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:52.743309",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-012-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:54.527714",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-012-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:54.564226",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-013-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:56.357275",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-013-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:56.458786",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-014-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:58.242771",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-014-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:10:58.296281",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-015-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:00.037497",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-015-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:00.109008",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-016-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:01.875326",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-016-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:01.944328",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-017-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:03.711492",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-017-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:03.764004",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-018-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:05.520781",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-018-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:05.590789",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-019-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:07.373554",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-019-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:07.457060",
+      "step": "answer start",
+      "status": "ok",
+      "case": "EXPERT-020-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:09.231229",
+      "step": "answer end",
+      "status": "ok",
+      "case": "EXPERT-020-PILOT3"
+    },
+    {
+      "timestamp": "2026-08-28T20:11:09.286735",
+      "step": "EXPERT end",
+      "status": "ok",
+      "metrics": {
+        "accuracy": 0.25,
+        "precision": [
+          0.0,
+          0.0,
+          0.8333333333333334
+        ],
+        "recall": [
+          0.0,
+          0.0,
+          0.35714285714285715
+        ],
+        "macro_f1": 0.16666666666666666,
+        "warning_recall": 0.0,
+        "hallucination_catch_rate": 0.35714285714285715,
+        "false_safe_rate": 0.6428571428571429,
+        "false_block_rate": 0.0,
+        "adversarial_robustness_score": null,
+        "unseen_generalization_score": null
+      }
+    },
+    {
+      "timestamp": "2026-08-28T20:11:09.305735",
+      "step": "result file writing end",
+      "status": "ok",
+      "file": "results/red_team_model_results.json"
+    }
+  ],
+  "last_completed_step": "result file writing end"
+}

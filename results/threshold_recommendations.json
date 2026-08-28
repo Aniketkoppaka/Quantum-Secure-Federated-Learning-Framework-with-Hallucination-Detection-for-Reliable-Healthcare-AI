@@ -1,0 +1,59 @@
+{
+  "source": "fresh pilot artifacts only",
+  "artifact_limitations": {
+    "blocked_cases_available": 14,
+    "blocked_cases_requested": 20,
+    "support_score_saved": false,
+    "risk_score_saved": false,
+    "consistency_score_saved": false,
+    "nli_score_saved": false,
+    "retrieved_evidence_saved": false
+  },
+  "current_thresholds": {
+    "safe_threshold": 0.72,
+    "warn_threshold": 0.48,
+    "block_composite_threshold_without_evidence": 0.2,
+    "risk_warning_cap": 0.5,
+    "risk_block_cap": 0.8
+  },
+  "observed_errors": {
+    "blocked_to_safe": 8,
+    "safe_to_blocked": 6,
+    "warning_to_safe": 35
+  },
+  "recommendations": [
+    {
+      "priority": 1,
+      "change": "Persist component scores and exact decision branch per case",
+      "reason": "Current artifacts cannot identify whether retrieval, NLI, rules, or consistency caused an individual threshold error",
+      "threshold_change": "none",
+      "confidence": "high"
+    },
+    {
+      "priority": 2,
+      "change": "Require positive evidence and successful NLI support before VERIFIED_SAFE",
+      "reason": "35 WARNING cases and 8 BLOCKED cases crossed the SAFE boundary",
+      "threshold_change": "calibrate on a balanced validation set; do not guess a new value",
+      "confidence": "high"
+    },
+    {
+      "priority": 3,
+      "change": "Add explicit warning override for pregnancy, kidney, liver, elderly, and interaction contexts",
+      "reason": "Warning-to-safe errors show inadequate clinical-context gating",
+      "threshold_change": "not determinable from saved artifacts",
+      "confidence": "medium"
+    },
+    {
+      "priority": 4,
+      "change": "Add explicit contradiction/emergency block override",
+      "reason": "Eight blocked cases were marked SAFE",
+      "threshold_change": "not determinable from saved artifacts",
+      "confidence": "high"
+    }
+  ],
+  "do_not_do": [
+    "Do not lower the SAFE threshold based on this pilot",
+    "Do not claim a 20-blocked-case audit when only 14 blocked cases exist",
+    "Do not attribute individual failures to NLI or retrieval without persisted per-case evidence"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "source": "fresh balanced_90 diagnostic artifacts",
+  "current_thresholds": {
+    "safe_threshold": 0.72,
+    "warn_threshold": 0.48,
+    "risk_warning_cap": 0.5,
+    "risk_block_cap": 0.8
+  },
+  "observed": {
+    "accuracy": 0.1888888889,
+    "macro_f1": 0.2036474164,
+    "warning_recall": 0.0,
+    "blocked_recall": 0.3666666667,
+    "blocked_to_safe": 18,
+    "blocked_to_warning": 1,
+    "warning_to_safe": 30,
+    "safe_to_blocked": 6
+  },
+  "recommendations": {
+    "safe_threshold": {
+      "recommended": 0.72,
+      "status": "provisional_only",
+      "reason": "Changing the scalar threshold cannot separate blocked cases with confidence 1.0 from safe cases.",
+      "calibration_needed": true
+    },
+    "warning_threshold": {
+      "recommended": "Do not tune from this run alone",
+      "reason": "warn_threshold=0.48 is not used by the final classification branch; final warning is composite_score < 0.72 after blocking logic."
+    },
+    "block_threshold": {
+      "recommended": "Add a semantic safety override before SAFE",
+      "reason": "18 BLOCKED cases crossed into SAFE despite high support and low risk scores."
+    },
+    "risk_weighting": {
+      "increase": true,
+      "reason": "Risk did not sufficiently penalize blocked actions; contraindication and emergency signals need priority over generic evidence support."
+    },
+    "nli_trust": {
+      "overtrusted": true,
+      "reason": "High-confidence NEUTRAL outputs coexist with unsafe final SAFE decisions; neutral must not be treated as affirmative safety evidence."
+    },
+    "retrieval_quality": {
+      "contributing_to_errors": true,
+      "reason": "Evidence summaries and relevance scores show weak or mismatched documents for several errors."
+    }
+  },
+  "gate_before_full_benchmark": [
+    "Persist and inspect contraindication/emergency rule flags per case",
+    "Require explicit NLI entailment or verified rule support for VERIFIED_SAFE",
+    "Use multiple generated candidates so consistency is not identically 1.0",
+    "Recalibrate on a balanced validation set with independent clinical labels",
+    "Do not run a healthcare safety claim benchmark until false-safe cases are resolved"
+  ]
+}

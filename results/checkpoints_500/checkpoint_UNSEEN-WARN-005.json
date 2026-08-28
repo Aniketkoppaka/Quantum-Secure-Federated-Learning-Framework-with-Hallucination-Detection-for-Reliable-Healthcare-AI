@@ -1,0 +1,71 @@
+{
+  "id": "UNSEEN-WARN-005",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.6569,
+  "diagnostic": {
+    "case_id": "UNSEEN-WARN-005",
+    "question": "In a new patient situation (variant 1), a person takes lithium and has several days of vomiting; should a clinician be contacted?",
+    "generated_answer": " Yes or no.\nA:\nYes, a clinician should be contacted in this case. Lithium is a medication used to treat bipolar disorder and other mental health conditions. It can cause side effects such as nausea, vomiting, and dizziness. If the patient experiences these symptoms for more than a few days, it may indicate that they are experiencing an adverse reaction to lithium. A healthcare provider should monitor the patient's condition closely and consider contacting their primary care physician or another qualified medical",
+    "retrieved_evidence": [
+      {
+        "source_id": "PMID:33863782",
+        "title": "Clinical Pharmacology and Geriatric Triage: Toxicity, Renal Adjustments, and Acute Decompensation",
+        "category": "Pharmacology & Geriatrics",
+        "relevance": 0.4457,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33863782/",
+        "summary": "In chronic kidney disease, poor renal filtration, and hepatic dysfunction, OTC analgesic and cold product dosing requires clinician review. Therapeutic lithium ..."
+      },
+      {
+        "source_id": "PMID:26792348",
+        "title": "American Epilepsy Society: Evidence-Based Guideline for Treatment of Convulsive Status Epilepticus",
+        "category": "Neurology",
+        "relevance": 0.1935,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26792348/",
+        "summary": "Phase 1 (5-20 min): IV Lorazepam (0.1 mg/kg, max 4 mg) or IM Midazolam (10 mg) is the first-line therapy. Phase 2 (20-40 min): If seizures persist, administer I..."
+      },
+      {
+        "source_id": "PMID:34262100",
+        "title": "Clinical Toxicology: Acetaminophen Toxicity and N-Acetylcysteine Dosing",
+        "category": "Pharmacology & Toxicology",
+        "relevance": 0.1585,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34262100/",
+        "summary": "In acute acetaminophen (paracetamol) overdose, treatment with N-acetylcysteine (NAC) is indicated if serum acetaminophen levels fall above the Rumack-Matthew no..."
+      }
+    ],
+    "nli_results": [
+      {
+        "claim": "A:\nYes, a clinician should be contacted in this case.",
+        "label": "ENTAILED",
+        "score": 0.691
+      },
+      {
+        "claim": "Lithium is a medication used to treat bipolar disorder and other mental health conditions.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "It can cause side effects such as nausea, vomiting, and dizziness.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "If the patient experiences these symptoms for more than a few days, it may indicate that they are experiencing an adverse reaction to lithium.",
+        "label": "NEUTRAL",
+        "score": 0.49
+      },
+      {
+        "claim": "A healthcare provider should monitor the patient's condition closely and consider contacting their primary care physician or another qualified medical",
+        "label": "NEUTRAL",
+        "score": 0.49
+      }
+    ],
+    "support_score": 0.53,
+    "risk_score": 0.1739,
+    "consistency_score": 1.0,
+    "final_confidence": 0.6569,
+    "predicted_label": "CLINICAL_WARNING",
+    "ground_truth": "CLINICAL_WARNING",
+    "fallback_used": false
+  }
+}

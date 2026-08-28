@@ -7,6 +7,8 @@ Validates:
 """
 
 import pytest
+import json
+from run_red_team_model import append_diagnostic
 from pqc_security import PQCManager, KyberKEM, DilithiumSigner
 from hallucination_engine import (
     HallucinationDecisionEngine,
@@ -96,3 +98,19 @@ def test_federated_learning_simulation():
     report_r2 = runner.run_federated_round(2)
     assert report_r2.round_number == 2
     assert report_r2.global_loss < report_r1.global_loss
+
+def test_clinical_warning_class_is_reachable():
+    engine = HallucinationDecisionEngine()
+    decision = engine.evaluate_response(
+        "What should be considered for a patient with persistent fatigue?",
+        ["Some causes may include anemia or thyroid disease; clinical examination and laboratory testing are needed."]
+    )
+    assert decision.status == SafetyStatus.CLINICAL_WARNING
+    assert decision.action == "WARN"
+
+def test_case_diagnostic_jsonl_is_written(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    append_diagnostic({"diagnostic": {"case_id": "TEST-1", "question": "q", "generated_answer": "a", "retrieved_evidence": [], "nli_results": [], "support_score": 0.5, "risk_score": 0.2, "consistency_score": 1.0, "final_confidence": 0.7, "predicted_label": "VERIFIED_SAFE", "ground_truth": "VERIFIED_SAFE", "fallback_used": False}})
+    lines = (tmp_path / "results" / "case_diagnostics.jsonl").read_text().splitlines()
+    assert len(lines) == 1
+    assert json.loads(lines[0])["case_id"] == "TEST-1"

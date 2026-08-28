@@ -1,0 +1,6 @@
+{
+  "id": "SAFE-001-PILOT3",
+  "expected": "VERIFIED_SAFE",
+  "predicted": "BLOCKED",
+  "confidence": 0.15
+}

@@ -28,6 +28,7 @@ class VerificationDecision:
     self_consistency_score: float
     evidence_relevance_score: float
     factual_entailment_score: float
+    risk_score: float
     critical_contradiction_found: bool
     evidence_citations: List[Dict[str, Any]]
     claims_breakdown: List[Dict[str, Any]]
@@ -53,12 +54,15 @@ class HallucinationDecisionEngine:
         retriever: Optional[MedicalKnowledgeRetriever] = None,
         consistency_analyzer: Optional[SelfConsistencyAnalyzer] = None,
         fact_checker: Optional[FactChecker] = None,
+        embedding_model=None,
+        faiss_index=None,
+        nli_pipeline=None,
         safe_threshold: float = 0.72,
         warn_threshold: float = 0.48
     ):
-        self.retriever = retriever or MedicalKnowledgeRetriever()
+        self.retriever = retriever or MedicalKnowledgeRetriever(embedding_model=embedding_model, faiss_index=faiss_index)
         self.consistency_analyzer = consistency_analyzer or SelfConsistencyAnalyzer()
-        self.fact_checker = fact_checker or FactChecker()
+        self.fact_checker = fact_checker or FactChecker(nli_pipeline=nli_pipeline)
         self.safe_threshold = safe_threshold
         self.warn_threshold = warn_threshold
 
@@ -79,6 +83,7 @@ class HallucinationDecisionEngine:
                 self_consistency_score=0.0,
                 evidence_relevance_score=0.0,
                 factual_entailment_score=0.0,
+                risk_score=1.0,
                 critical_contradiction_found=True,
                 evidence_citations=[],
                 claims_breakdown=[],
@@ -113,6 +118,13 @@ class HallucinationDecisionEngine:
         if fact_report.has_critical_contradiction:
             composite_score = min(composite_score, 0.15)
 
+        # Weighted risk score: contraindication dominates, then factual and
+        # retrieval uncertainty, with disagreement acting as a warning signal.
+        risk = (0.55 if fact_report.has_critical_contradiction else 0.0)
+        risk += 0.25 * (1.0 - s_ent) + 0.15 * (1.0 - s_ret) + 0.05 * (1.0 - s_cons)
+        if risk > 0.80: composite_score = min(composite_score, 0.15)
+        elif risk > 0.50: composite_score = min(composite_score, 0.55)
+
         composite_score = round(composite_score, 4)
 
         # 5. Gating Decision Logic
@@ -139,7 +151,9 @@ class HallucinationDecisionEngine:
             for c in fact_report.claims
         ]
 
-        if fact_report.has_critical_contradiction or composite_score < self.warn_threshold:
+        # Reserve BLOCK for explicit dangerous contradictions or completely
+        # ungrounded output. Moderate uncertainty is a warning, not a block.
+        if fact_report.has_critical_contradiction or risk > 0.80 or (composite_score < 0.20 and not evidence_list):
             status = SafetyStatus.BLOCKED_HALLUCINATION
             action = "BLOCK"
             explanation = (
@@ -181,6 +195,7 @@ class HallucinationDecisionEngine:
             self_consistency_score=round(s_cons, 4),
             evidence_relevance_score=round(s_ret, 4),
             factual_entailment_score=round(s_ent, 4),
+            risk_score=round(risk, 4),
             critical_contradiction_found=fact_report.has_critical_contradiction,
             evidence_citations=citations,
             claims_breakdown=claims_breakdown,

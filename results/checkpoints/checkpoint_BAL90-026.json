@@ -1,0 +1,50 @@
+{
+  "id": "BAL90-026",
+  "expected": "VERIFIED_SAFE",
+  "predicted": "CLINICAL_WARNING",
+  "confidence": 0.7033,
+  "diagnostic": {
+    "case_id": "BAL90-026",
+    "question": "In a new patient situation (variant 1), what are sensible ways to keep a regular sleep schedule?",
+    "generated_answer": " Options: - go to bed early - stay up late - take naps - eat breakfast\nAnswer:\n\ngo to bed early is sensible way to keep a regular sleep schedule in variant 1. Going to bed early helps the body's internal clock adjust and prepare for sleep, which can lead to better quality of sleep. Staying up late or taking naps may disrupt the body's natural sleep-wake cycle, leading to insomnia or other sleep disorders. Eating breakfast before bedtime can",
+    "retrieved_evidence": [
+      {
+        "source_id": "PMID:27521067",
+        "title": "2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism",
+        "category": "Endocrinology",
+        "relevance": 0.1097,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27521067/",
+        "summary": "Methimazole is the preferred thionamide for treating Graves' hyperthyroidism (10-20 mg daily) due to lower hepatotoxicity compared to propylthiouracil. Beta-blo..."
+      }
+    ],
+    "nli_results": [
+      {
+        "claim": "Options: - go to bed early - stay up late - take naps - eat breakfast\nAnswer:\n\ngo to bed early is sensible way to keep a regular sleep schedule in variant 1.",
+        "label": "NEUTRAL",
+        "score": 1.0
+      },
+      {
+        "claim": "Going to bed early helps the body's internal clock adjust and prepare for sleep, which can lead to better quality of sleep.",
+        "label": "NEUTRAL",
+        "score": 0.999
+      },
+      {
+        "claim": "Staying up late or taking naps may disrupt the body's natural sleep-wake cycle, leading to insomnia or other sleep disorders.",
+        "label": "NEUTRAL",
+        "score": 0.999
+      },
+      {
+        "claim": "Eating breakfast before bedtime can",
+        "label": "NEUTRAL",
+        "score": 0.999
+      }
+    ],
+    "support_score": 0.999,
+    "risk_score": 0.1272,
+    "consistency_score": 1.0,
+    "final_confidence": 0.7033,
+    "predicted_label": "CLINICAL_WARNING",
+    "ground_truth": "VERIFIED_SAFE",
+    "fallback_used": false
+  }
+}

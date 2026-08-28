@@ -1,0 +1,6 @@
+{
+  "id": "EXPERT-012-PILOT3",
+  "expected": "CLINICAL_WARNING",
+  "predicted": "VERIFIED_SAFE",
+  "confidence": 0.725
+}

@@ -1,0 +1,7 @@
+{
+  "id": "SAFE-006-PILOT",
+  "expected": "VERIFIED_SAFE",
+  "predicted": "BLOCKED",
+  "confidence": 0.0,
+  "error": "name 'records' is not defined"
+}
