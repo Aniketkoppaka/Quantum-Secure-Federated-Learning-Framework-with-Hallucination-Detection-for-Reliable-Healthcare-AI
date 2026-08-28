@@ -1,23 +1,27 @@
 """
-CRYSTALS-Dilithium Digital Signature Engine
-Implements lattice-based Module-SIS / Fiat-Shamir with Aborts (NIST ML-DSA / CRYSTALS-Dilithium specifications)
+CRYSTALS-Dilithium (NIST FIPS 204 / ML-DSA-65) Digital Signature Engine
+Implements authentic lattice-based Module-SIS / Fiat-Shamir with Aborts cryptography
 for quantum-resistant identity authentication and model update integrity in Federated Learning.
 """
 
-import os
-import hashlib
 import json
 import base64
-import hmac
 from typing import Dict, Any, Optional
 from dataclasses import dataclass
+
+try:
+    from pqcrypto.sign import ml_dsa_65, ml_dsa_44, ml_dsa_87
+    from pqcrypto import InvalidSignatureError
+    HAS_NATIVE_PQC = True
+except ImportError:
+    HAS_NATIVE_PQC = False
 
 
 @dataclass
 class DilithiumKeyPair:
     public_key: bytes
     secret_key: bytes
-    variant: str = "Dilithium3"
+    variant: str = "Dilithium3 (ML-DSA-65)"
 
     def public_key_b64(self) -> str:
         return base64.b64encode(self.public_key).decode("utf-8")
@@ -30,7 +34,7 @@ class DilithiumKeyPair:
 class DilithiumSignature:
     signature_bytes: bytes
     signer_id: str
-    variant: str = "Dilithium3"
+    variant: str = "Dilithium3 (ML-DSA-65)"
 
     def to_dict(self) -> Dict[str, str]:
         return {
@@ -44,91 +48,56 @@ class DilithiumSignature:
         return cls(
             signature_bytes=base64.b64decode(data["signature_bytes"]),
             signer_id=data["signer_id"],
-            variant=data.get("variant", "Dilithium3")
+            variant=data.get("variant", "Dilithium3 (ML-DSA-65)")
         )
 
 
 class DilithiumSigner:
     """
-    CRYSTALS-Dilithium Lattice Signature Engine.
-    Implements NIST FIPS 204 (ML-DSA) parameters:
-    - Dilithium2 (Security Level 2)
-    - Dilithium3 (Security Level 3 - Recommended)
-    - Dilithium5 (Security Level 5)
+    CRYSTALS-Dilithium / ML-DSA Lattice Signature Engine.
+    Implements NIST FIPS 204 standards:
+    - Dilithium2 (ML-DSA-44 / Security Level 2)
+    - Dilithium3 (ML-DSA-65 / Security Level 3 - Recommended)
+    - Dilithium5 (ML-DSA-87 / Security Level 5)
     """
 
-    Q = 8380417
-    D = 13
-    GAMMA1 = 2**19
-    GAMMA2 = (Q - 1) // 32
-
     def __init__(self, variant: str = "Dilithium3"):
-        self.variant = variant
-        if variant == "Dilithium2":
-            self.k, self.l = 4, 4
-        elif variant == "Dilithium5":
-            self.k, self.l = 8, 7
+        if "2" in variant or "44" in variant:
+            self.variant = "Dilithium2 (ML-DSA-44)"
+            self._module = ml_dsa_44 if HAS_NATIVE_PQC else None
+        elif "5" in variant or "87" in variant:
+            self.variant = "Dilithium5 (ML-DSA-87)"
+            self._module = ml_dsa_87 if HAS_NATIVE_PQC else None
         else:
-            self.variant = "Dilithium3"
-            self.k, self.l = 6, 5
+            self.variant = "Dilithium3 (ML-DSA-65)"
+            self._module = ml_dsa_65 if HAS_NATIVE_PQC else None
 
-    def generate_keypair(self, signer_id: str = "hospital_node", seed: Optional[bytes] = None) -> DilithiumKeyPair:
+    def generate_keypair(self, signer_id: str = "hospital_node") -> DilithiumKeyPair:
         """
-        Generates a quantum-resistant Dilithium public/private keypair for a node.
+        Generates an authentic NIST FIPS 204 ML-DSA public and private keypair for a node.
+        ML-DSA-65 public key size: 1,952 bytes; secret key size: 4,032 bytes.
         """
-        if seed is None:
-            seed = os.urandom(64) + signer_id.encode("utf-8")
+        if not HAS_NATIVE_PQC or self._module is None:
+            raise RuntimeError("pqcrypto library is required for authentic NIST PQC operations.")
         
-        zeta = hashlib.sha3_512(seed).digest()
-        rho, sigma, k_key = zeta[:32], zeta[32:64], zeta[64:96] if len(zeta) >= 96 else zeta[:32]
-
-        # Generate matrix A from rho and secret vectors s1, s2 from sigma
-        matrix_seed = hashlib.shake_256(rho + b"dilithium_matrix_A").digest(self.k * self.l * 32)
-        s_seed = hashlib.shake_256(sigma + b"dilithium_secret_s").digest((self.k + self.l) * 64)
-        
-        # Public key root verification hash
-        t_hash = hashlib.sha3_384(matrix_seed + s_seed + rho).digest()
-        public_key = rho + t_hash + matrix_seed[:32]
-        
-        # Secret key sk = rho || k_key || tr || s_seed || public_key
-        tr = hashlib.sha3_256(public_key).digest()
-        secret_key = rho + k_key + tr + s_seed + public_key
-
-        return DilithiumKeyPair(public_key=public_key, secret_key=secret_key, variant=self.variant)
+        pk, sk = self._module.keygen()
+        return DilithiumKeyPair(public_key=bytes(pk), secret_key=bytes(sk), variant=self.variant)
 
     def sign(self, message: bytes, secret_key: bytes, signer_id: str = "hospital_node") -> DilithiumSignature:
         """
         Dilithium.Sign(sk, M) -> Signature
-        Produces a lattice-based digital signature over the message (e.g. model update tensor hash).
+        Produces an authentic lattice-based digital signature over the model update hash.
+        ML-DSA-65 signature size: 3,309 bytes.
         """
-        rho = secret_key[:32]
-        k_key = secret_key[32:64]
-        tr = secret_key[64:96]
+        if not HAS_NATIVE_PQC or self._module is None:
+            raise RuntimeError("pqcrypto library is required for authentic NIST PQC operations.")
         
-        # Digest mu = CRH(tr || M)
-        mu = hashlib.sha3_512(tr + message).digest()
-
-        # Ephemeral masking randomness y
-        rnd = os.urandom(32)
-        rho_prime = hashlib.shake_256(k_key + mu + rnd).digest(64)
-        w_commitment = hashlib.shake_256(rho_prime + b"commitment_w").digest(self.k * 32)
-
-        # Challenge polynomial c = H(mu || w1)
-        challenge_c = hashlib.sha3_256(mu + w_commitment).digest()
-
-        # Secret lattice matrix response z = y + c * s
-        s_seed_len = (self.k + self.l) * 64
-        s_seed = secret_key[96:96 + s_seed_len]
-        
-        sig_vector = hashlib.shake_256(s_seed + challenge_c + mu).digest(self.l * 64)
-        
-        # Signer binding tag
-        auth_tag = hmac.new(challenge_c, message + signer_id.encode(), hashlib.sha3_256).digest()
-
-        signature_bytes = challenge_c + sig_vector + auth_tag
+        # Prepend signer ID context to message to bind identity cryptographically
+        contextual_msg = f"{signer_id}:".encode("utf-8") + message
+        signature_bytes = self._module.sign(secret_key, contextual_msg)
 
         return DilithiumSignature(
-            signature_bytes=signature_bytes,
+            signature_bytes=bytes(signature_bytes),
             signer_id=signer_id,
             variant=self.variant
         )
@@ -136,26 +105,15 @@ class DilithiumSigner:
     def verify(self, message: bytes, signature: DilithiumSignature, public_key: bytes) -> bool:
         """
         Dilithium.Verify(pk, M, sig) -> {True, False}
-        Verifies that the message was signed by the authentic hospital node and has not been tampered with.
+        Authenticates that the message was signed by the registered hospital node and has not been tampered with.
         """
+        if not HAS_NATIVE_PQC or self._module is None:
+            raise RuntimeError("pqcrypto library is required for authentic NIST PQC operations.")
+        
         try:
-            sig_bytes = signature.signature_bytes
-            if len(sig_bytes) < 64:
-                return False
-
-            challenge_c = sig_bytes[:32]
-            sig_vector = sig_bytes[32:-32]
-            auth_tag = sig_bytes[-32:]
-
-            # Verify signer binding tag matches
-            expected_auth_tag = hmac.new(challenge_c, message + signature.signer_id.encode(), hashlib.sha3_256).digest()
-            if not hmac.compare_digest(auth_tag, expected_auth_tag):
-                return False
-
-            # Verify public key integrity
-            if len(public_key) < 64:
-                return False
-
+            contextual_msg = f"{signature.signer_id}:".encode("utf-8") + message
+            self._module.verify(public_key, contextual_msg, signature.signature_bytes)
             return True
-        except Exception:
+        except (InvalidSignatureError, Exception):
             return False
+

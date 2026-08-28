@@ -408,7 +408,7 @@ def evaluate_case_subset(
         "mean_blocked_confidence_pct": per_class_stats["BLOCKED"]["mean_confidence_pct"],
         "confusion_matrix": matrix,
         "per_class_performance": per_class_stats,
-        "case_samples": detailed_results[:10]  # Store first 10 for inspectability
+        "case_samples": detailed_results
     }
 
 

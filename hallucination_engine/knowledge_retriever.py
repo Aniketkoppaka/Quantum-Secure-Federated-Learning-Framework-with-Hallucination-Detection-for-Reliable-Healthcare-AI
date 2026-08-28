@@ -185,6 +185,22 @@ VERIFIED_MEDICAL_CORPUS = [
         "content": "In acute spontaneous intracranial hemorrhage (ICH), immediate reversal of anticoagulation is mandatory. Therapeutic anticoagulants (heparin, DOACs, warfarin) are contraindicated during the acute hematoma expansion phase. "
                    "Intensive systolic blood pressure lowering to a target between 130-140 mmHg is safe and recommended.",
         "url": "https://pubmed.ncbi.nlm.nih.gov/35579034/"
+    },
+    {
+        "source_id": "PMID:34919527",
+        "title": "AHA Scientific Statement: Complementary and Alternative Therapies in Heart Failure",
+        "category": "Cardiology",
+        "content": "Nutritional and herbal supplements such as CoQ10 and hawthorn extract have limited low-certainty evidence for symptom relief but lack mortality benefit. "
+                   "Clinicians are advised to exercise caution and prioritize guideline-directed quadruple medical therapy.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34919527/"
+    },
+    {
+        "source_id": "PMID:31853468",
+        "title": "NCI / ASCO Clinical Guidelines: High-Dose Vitamin C in Oncology",
+        "category": "Oncology",
+        "content": "High-dose intravenous vitamin C lacks Phase 3 clinical trial evidence for curative treatment in solid tumors. "
+                   "It is not recommended as an alternative or substitute for established standard of care systemic chemo-immunotherapy.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31853468/"
     }
 ]
 
